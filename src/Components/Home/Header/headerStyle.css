@@ -1,0 +1,18 @@
+
+.hero-img-section img{
+    padding-top: 50px;
+    height:650px;
+    
+}
+.hero-img-section{
+    overflow: hidden !important;
+}
+@media (max-width: 768px) {
+    .hero-img-section img{
+        overflow: hidden !important;
+        height:350px;
+    }
+    .hero-img-section{
+        height:450px;
+    }
+}
