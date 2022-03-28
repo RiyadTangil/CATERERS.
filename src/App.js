@@ -16,7 +16,7 @@ import AddService from './Components/AddService/AddService';
 import Book from './Components/Book/Book/Book';
 import BookList from './Components/BookList/BookList/BookList';
 import Review from './Components/Review/Review';
-import AddAdmin from './Components/AddAdmin/AddAdmin';
+import AddCategory from './Components/AddCategory/AddCategory';
 import OrderList from './Components/OrderList/OrderList/OrderList';
 import ManageService from './Components/ManageService/ManageService/ManageService';
 import OurCapability from './Components/Home/OutCapability/OurCapability';
@@ -55,8 +55,8 @@ function App() {
               <Route path="/dashboard/addService">
                 <AddService></AddService>
               </Route>
-              <Route path="/dashboard/makeAdmin">
-                <AddAdmin></AddAdmin>
+              <Route path="/dashboard/add-category">
+                <AddCategory></AddCategory>
               </Route>
               <Route path="/dashboard/review">
                 <Review></Review>

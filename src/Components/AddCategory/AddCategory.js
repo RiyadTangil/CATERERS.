@@ -1,19 +1,22 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import swal from 'sweetalert';
 import toast from 'react-hot-toast';
 import SideVarNav from '../Dashboard/SidvarNav/SideVarNav';
-const AddAdmin = () => {
-    const [admin, setAdmin] = useState(null)
-    console.log(admin)
+import { UserContext } from '../../App';
+import ManageCategory from './ManageCategory';
+const AddCategory = () => {
+    const [category, setCategory] = useState(null)
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext)
+    console.log(category, loggedInUser)
     const handleAdmin = (e) => {
         e.preventDefault()
         const loading = toast.loading('Please wait...!');
-        fetch("https://morning-thicket-61908.herokuapp.com/addAdmin", {
+        fetch("http://localhost:5000/category", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/Json'
             },
-            body: JSON.stringify({ "email": admin })
+            body: JSON.stringify({ "email": loggedInUser.email, "categoryName": category })
         })
             .then(res => res.json())
             .then(data => {
@@ -35,31 +38,24 @@ const AddAdmin = () => {
         <div className="row">
             <SideVarNav></SideVarNav>
             <div className="col-md-9 mt-5">
-
                 <div>
-
-
-
-                    <form style={{ backgroundColor: "#F4FDFB" }} onSubmit={handleAdmin} className="w-75 p-5  shadow">
-
-
-                        <div class="row mb-3">
-                            <label for="inputEmail3" name="email" class="col-sm-2 col-form-label">Email</label>
-                            <div class="col-sm-10">
-                                <input type="email" name="email" onBlur={(e) => setAdmin(e.target.value)} class="form-control" id="inputEmail3"></input>
+                    <form style={{ backgroundColor: "#F4FDFB" }} onSubmit={handleAdmin} className=" p-5  shadow">
+                        <div className="row">
+                            <div className="col-8">
+                                <input type="text" name="description" onBlur={(e) => setCategory(e.target.value)} className="form-control" placeholder="Add Category Name" ></input>
                             </div>
+                            <div className="col-4">
+                                < button type="submit" className="btn main-bg">Add Category</button>
+                            </div>
+
                         </div>
-
-                        <button type="submit" class="btn main-bg">Submit</button>
-
+                       
                     </form>
-
-
-
                 </div>
+                <ManageCategory/>
             </div>
         </div>
     );
 };
 
-export default AddAdmin;
+export default AddCategory;
