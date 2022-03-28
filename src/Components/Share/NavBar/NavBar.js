@@ -36,7 +36,6 @@ const NavBar = () => {
 
     return (
         <div>
-
             <Navbar fixed="top" style={{ backgroundColor: "rgb(0, 156, 134)" }} collapseOnSelect expand="lg" variant="dark">
                 <Navbar.Brand href="/">
                     <img style={{ width: "40px", marginLeft: "20px" }} src={mylogo} alt="" />
@@ -51,9 +50,8 @@ const NavBar = () => {
                                 className="me-2"
                                 aria-label="Search"
                             />
-                            {/* <Button variant="outline-success">Search</Button> */}
                         </Form>
-                        {loggedInUser.userType === "caterer" && <Link className="px-2 mx-3 text-light text-decoration-none" to="/dashboard/profile">menu</Link>}
+                        {loggedInUser.userType === "caterer" && <Link className="px-2 mx-3 text-light text-decoration-none" to="/">menu</Link>}
                         <Link className="px-2 mx-3 text-light text-decoration-none" > <FontAwesomeIcon icon={faCartArrowDown} /><span className="selected-card">{cardItems.length}</span></Link>
                         <Nav className=" text-light text-decoration-none p-0 m-0" >
                             {
