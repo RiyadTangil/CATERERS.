@@ -30,27 +30,6 @@ const Book = () => {
 
                 <div style={{ backgroundColor: "#F4FDFB" }} className="shadow pt-5 px-5">
                     <div className=" d-flex   justify-content-center  flex-column">
-
-                        <>
-                            <Toast className="toast-right" onClose={() => setShow(false)} show={show} delay={5000} autohide>
-                         
-
-                                <Toast.Header>
-                                  
-                                    <img src={infoEmojis} className="rounded mr-2" alt="Info" />
-                                    <strong className="mr-auto">Important Info</strong>
-                                </Toast.Header>
-                                <Toast.Body className="text-center">
-                                    Use this Card Number to test the payment
-                            <br />
-                                    <b>4242 4242 4242 4242</b>
-                                </Toast.Body>
-                            </Toast>
-
-                        </>
-
-                    
-
                         <Elements stripe={stripePromise}>
                             <SimpleCardForm order={order}></SimpleCardForm>
                         </Elements>

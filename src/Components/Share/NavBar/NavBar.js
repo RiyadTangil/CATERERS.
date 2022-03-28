@@ -12,7 +12,6 @@ import "./NavBar.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-regular-svg-icons';
 import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
-
 const NavBar = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext)
     const [cardItems, setCardItems] = useContext(UserCard);
@@ -25,9 +24,7 @@ const NavBar = () => {
         if (!token) {
             return false;
         }
-        console.log(token);
         const decodedToken = jwt_decode(token);
-        console.log(decodedToken);
         const { name, email, picture, userType } = decodedToken;
         const newSignedInUser = { name: name, email: email, img: picture, userType: userType }
         setLoggedInUser(newSignedInUser)
@@ -53,7 +50,8 @@ const NavBar = () => {
                             />
                             {/* <Button variant="outline-success">Search</Button> */}
                         </Form>
-                        {loggedInUser.userType === "caterer" && <Link className="px-2 mx-3 text-light text-decoration-none" to="/dashboard/profile">menu</Link>}
+                        {/* {loggedInUser.userType === "caterer" && <Link className="px-2 mx-3 text-light text-decoration-none" to="/dashboard/profile">menu</Link>} */}
+                        <Link className="px-2 mx-3 text-light text-decoration-none" to="/dashboard/profile">menu</Link>
                         <Link className="px-2 mx-3 text-light text-decoration-none" > <FontAwesomeIcon icon={faCartArrowDown} /><span className="selected-card">{cardItems.length}</span></Link>
                         <Nav className=" text-light text-decoration-none p-0 m-0" >
                             {
@@ -74,13 +72,13 @@ const NavBar = () => {
                                                 <Button className="d-block mb-2  main-bg " size="sm">
                                                     my profile
                                                 </Button>
-                                                <Button className="d-block  main-bg "  size="sm">
+                                                <Button className="d-block  main-bg " size="sm">
                                                     my orders
                                                 </Button>
                                                 {loggedInUser.userType === "caterer" &&
-                                                <Button className="d-block mt-2 main-bg"  size="sm">
-                                                    my menu
-                                                </Button>}
+                                                    <Button className="d-block mt-2 main-bg" size="sm">
+                                                        my menu
+                                                    </Button>}
                                             </div>
                                             <button onClick={handleLogOut} className="btn btn-outline-danger w-100 mt-4">Log Out?</button>
                                         </div>
