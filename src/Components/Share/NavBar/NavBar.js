@@ -70,14 +70,14 @@ const NavBar = () => {
                                             <p className="text-dark m-0"><small>{loggedInUser.email}</small></p>
                                             <div className='d-flex flex-column '>
                                                 <Button className="d-block mb-2  main-bg " size="sm">
-                                                    my profile
+                                                    My profile
                                                 </Button>
                                                 <Button className="d-block  main-bg "  size="sm">
-                                                    my orders
+                                                    My orders
                                                 </Button>
                                                 {loggedInUser.userType === "caterer" &&
                                                 <Button className="d-block mt-2 main-bg"  size="sm">
-                                                    my menu
+                                                    My menu
                                                 </Button>}
                                             </div>
                                             <button onClick={handleLogOut} className="btn btn-outline-danger w-100 mt-4">Log Out?</button>
@@ -85,7 +85,7 @@ const NavBar = () => {
                                     </Popup>
 
                                     :
-                                    <Link className="px-2 mx-3 text-light text-decoration-none" to="/login">Login</Link>
+                                    <Link className="px-2  mx-3 text-light text-decoration-none" to="/login">Login</Link>
                             }
                         </Nav>
                     </Nav>
