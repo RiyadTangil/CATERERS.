@@ -37,8 +37,8 @@ const ServiceDetails = ({ service ,handleCard}) => {
                             <p className="text-secondary">Lorem ipsum dolor Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum, dolorum. sit amet, consectetur adipisicing elit. Aliquam, quaerat?</p>
                             <button onClick={() => handleCard(service._id)} className="btn text-light submitButton">
                                 <span className="text-black">  Buy now</span>
-                                <div class="SubmitButton__horizontal"></div>
-                                <div class="submitButton__vertical"></div>
+                                <div className="SubmitButton__horizontal"></div>
+                                <div className="submitButton__vertical"></div>
                             </button>
                         </div>
                     </div>

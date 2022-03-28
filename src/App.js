@@ -1,6 +1,4 @@
 
-
-import Home from "./Components/Home/Home/Home"
 import "./App.css"
 import './style.css';
 import {
@@ -23,6 +21,7 @@ import OrderList from './Components/OrderList/OrderList/OrderList';
 import ManageService from './Components/ManageService/ManageService/ManageService';
 import OurCapability from './Components/Home/OutCapability/OurCapability';
 import Profile from "./Components/Dashboard/Profile/Profile";
+import Home from "./pages/Home";
 export const UserContext = createContext()
 export const UserOrder = createContext()
 export const UserCard = createContext()
@@ -41,7 +40,7 @@ function App() {
           <Router>
             <Switch>
               <Route exact path="/">
-                <Home></Home>
+                <Home/>
               </Route>
               <Route path="/login">
                 <Login></Login>

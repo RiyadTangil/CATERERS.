@@ -5,11 +5,8 @@ import "./headerStyle.css"
 
 
 const Header = () => {
-   
-       
-
     return (
-        <div  className="header-container">
+        <div className="header-container">
             <NavBar ></NavBar>
             <HeaderCarosel></HeaderCarosel>
         </div>

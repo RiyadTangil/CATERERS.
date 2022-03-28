@@ -55,12 +55,12 @@ const Login = (props) => {
                 .then(res => res.json())
                 .then(data => {
                     toast.dismiss(loading);
-                    console.log(data);
-                    storeAuthToken(data.token)
-                    setLoggedInUser(data.data)
+                
+                    storeAuthToken(data.token ? data?.token : null)
+                    setLoggedInUser(data?.data ? data?.data : [])
                     history.replace(from);
-                    if (data) {
-                        return swal("Admin Added", "Admin has been added successful.", "success");
+                    if (data?.token) {
+                        return swal("User Added", "User has been added successful.", "success");
                     }
                     swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true });
 
@@ -114,55 +114,35 @@ const Login = (props) => {
                     toast.dismiss(loading);
                     swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true });
                 })
-
-            // firebase.auth().signInWithEmailAndPassword(loginInfo.email, loginInfo.password)
-            //     .then((userCredential) => {
-            //         var { displayName, email } = userCredential.user;
-            //         let newUserInfo = { name: displayName, email: email }
-            //         newUserInfo.error = ''
-            //         newUserInfo.success = true
-            //         setLoggedInUser(newUserInfo)
-
-            //         history.replace(from);
-
-            //     })
-            //     .catch((error) => {
-            //         let newUserInfo = { ...loggedInUser }
-            //         newUserInfo.error = error.message;
-            //         newUserInfo.success = false
-            //         setLoggedInUser(newUserInfo)
-            //     });
         }
     }
-
-
     let history = useHistory();
     let location = useLocation();
     let { from } = location.state || { from: { pathname: "/" } };
+//this is the google sign in method . If require you can use
+    // const handleGoogleSignIn = () => {
+    //     const provider = new firebase.auth.GoogleAuthProvider();
+    //     firebase
+    //         .auth()
+    //         .signInWithPopup(provider)
+    //         .then((result) => {
+    //             const { displayName, email, photoURL } = result.user;
 
-    const handleGoogleSignIn = () => {
-        const provider = new firebase.auth.GoogleAuthProvider();
-        firebase
-            .auth()
-            .signInWithPopup(provider)
-            .then((result) => {
-                const { displayName, email, photoURL } = result.user;
+    //             const signedInUser = { name: displayName, email: email, img: photoURL };
+    //             setLoggedInUser(signedInUser);
 
-                const signedInUser = { name: displayName, email: email, img: photoURL };
-                setLoggedInUser(signedInUser);
+    //             // storeAuthToken();
+    //             history.replace(from);
+    //         })
+    //         .catch((error) => {
+    //             let newUserInfo = { ...loggedInUser }
+    //             newUserInfo.error = error.message;
+    //             setLoggedInUser(newUserInfo);
 
-                // storeAuthToken();
-                history.replace(from);
-            })
-            .catch((error) => {
-                let newUserInfo = { ...loggedInUser }
-                newUserInfo.error = error.message;
-                setLoggedInUser(newUserInfo);
-
-            });
+    //         });
 
 
-    };
+    // };
     return (
 
         <div className="login-page container ">
@@ -248,9 +228,9 @@ const Login = (props) => {
                             </>}
                     </form>
                     <p className="text-warning">{loggedInUser?.error}</p>
-                    <div className="justify-content-center d-flex">
+                    {/* <div className="justify-content-center d-flex">
                         <button className="btn main-bg" onClick={handleGoogleSignIn}>sign in with google</button>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
