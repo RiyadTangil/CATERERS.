@@ -54,7 +54,7 @@ const NavBar = () => {
                         </Form>
                         <Link className="px-2 mx-3 text-light text-decoration-none" to="/dashboard/profile">menu</Link>
                         {/* {loggedInUser.userType === "caterer" && <Link className="px-2 mx-3 text-light text-decoration-none" to="/dashboard/profile">menu</Link>} */}
-                        <Card show={show} setShow={setShow} />
+                        <Card show={show} setShow={setShow} cardItems={cardItems} />
                         <Link className="px-2 mx-3 text-light text-decoration-none" onClick={() => setShow(true)}>
                             <FontAwesomeIcon icon={faCartArrowDown} /><span className="selected-card">{cardItems.length}</span></Link>
                         <Nav className=" text-light text-decoration-none p-0 m-0" >
