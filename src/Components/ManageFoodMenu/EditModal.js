@@ -1,18 +1,18 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import MangesServiceDetails from './MenuDetails';
+import { Button, Modal } from 'react-bootstrap';
 import swal from 'sweetalert';
 import toast from 'react-hot-toast';
-import { useForm } from "react-hook-form";
-import { UserContext } from '../../App';
-import SideVarNav from '../Dashboard/SidvarNav/SideVarNav';
-const containerStyle = {
-    backgroundColor: "#F4FDFB",
-    // marginRight: "20px"
-}
-const AddFood = () => {
+const EditModal = ({ show, setShow,editId }) => {
     const [info, setInfo] = useState({});
     const [file, setFile] = useState(null);
-    const [loggedInUser, setLoggedInUser] = useContext(UserContext)
-    const [categories, setCategories] = useState([]);
+    const handleClose = () => {
+        setShow(false);
+    }
+    const handleEdit = (id) => {
+        console.log(id);
+
+    }
     const handleBlur = e => {
         const newInfo = { ...info };
         newInfo[e.target.name] = e.target.value;
@@ -23,34 +23,24 @@ const AddFood = () => {
         const newFile = e.target.files[0];
         setFile(newFile);
     }
-    useEffect(() => {
-        fetch("http://localhost:5000/category")
-            .then(res => res.json())
-            .then(data => setCategories(data))
-    }, [])
+    const containerStyle = {
+        backgroundColor: "#F4FDFB",
+    }
+    console.log(info.name);
     const onSubmit = (e) => {
         const loading = toast.loading('Please wait...!');
         e.preventDefault()
-        const formData = new FormData()
-        // formData.append('file', file);
-        // formData.append('name', info.name);
-        // formData.append('img', "testing");
-        // formData.append('description', info.description);
-        // formData.append('price', info.price);
-        // formData.append('catererId', loggedInUser.user_id);
-
-        fetch('http://localhost:5000/foods', {
-            method: 'POST',
+        fetch(`http://localhost:5000/foods/${editId}`, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/Json'
             },
             body: JSON.stringify({
-                img: "Testing",
+                "img": "Testing",
                 "name": info.name,
                 "description": info.description,
                 "price": info.price,
                 "category": info.category,
-                "catererId": loggedInUser.user_id
             })
 
         })
@@ -67,11 +57,15 @@ const AddFood = () => {
                 toast.dismiss(loading);
                 swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true });
             })
+        setShow(false);
     }
     return (
-        <div className="row">
-            <SideVarNav></SideVarNav>
-            <div className="col-md-9 mt-3">
+
+        <Modal show={show} onHide={handleClose}>
+            <Modal.Header className="border-0" closeButton>
+                <Modal.Title>Update Food </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
                 <div style={containerStyle} className="shadow">
                     <div className=" p-3   d-flex justify-content-center flex-column">
                         <div className="row  mt-2 p-3 g-3">
@@ -97,15 +91,13 @@ const AddFood = () => {
                                     </div>
 
                                 </div>
-
                                 <div className="row mt-2 g-3">
-                                    <div className="col-md-6 col-12">
-                                        <select onBlur={handleBlur} className="form-select form-select mb-3" name="category" aria-label=".form-select-lg example">
-                                            {categories?.map((category, index) => <option key={index} value={category.categoryName}>{category.categoryName}</option>)}
-
-
-                                        </select>
+                                    <div className="col form-group">
+                                        <label htmlFor="exampleInputEmail1">Description</label>
+                                        <input type="text" name="category" onBlur={handleBlur} className="form-control" placeholder="Food Description" ></input>
                                     </div>
+                                   
+
                                 </div>
                                 <div className="col-12 d-flex justify-content-end mt-2">
                                     < button type="submit" className="btn main-bg">Submit</button>
@@ -114,9 +106,12 @@ const AddFood = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+
+            </Modal.Body>
+
+        </Modal>
+
     );
 };
 
-export default AddFood;
+export default EditModal;

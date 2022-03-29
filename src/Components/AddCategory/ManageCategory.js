@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import swal from 'sweetalert';
 import toast from 'react-hot-toast';
-const ManageCategory = ({reload}) => {
+const ManageCategory = ({ reload }) => {
     const [categories, setCategories] = useState([])
     const handleDelete = (e, id) => {
 
@@ -45,7 +45,7 @@ const ManageCategory = ({reload}) => {
                 <tbody>
                     {
                         categories?.map((category, index) =>
-                            <tr>
+                            <tr className="border shadow-sm p-2 my-3 rounded-2">np
                                 <td>{index + 1}</td>
                                 <td>{category.categoryName}</td>
 

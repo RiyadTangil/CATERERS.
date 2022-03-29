@@ -41,17 +41,17 @@ const SideVarNav = () => {
           <Nav.Item>
             <Link to="/dashboard/Profile">  <FontAwesomeIcon icon={faUserCircle} /> Profile</Link>
           </Nav.Item>
-          {/* <Nav.Item>
+          <Nav.Item>
             <Link to="/dashboard/Book">
 
               <FontAwesomeIcon icon={faShoppingBag} />   Book</Link>
-          </Nav.Item> */}
-          {/* <Nav.Item>
+          </Nav.Item>
+          <Nav.Item>
             <Link to="/dashboard/Review"><FontAwesomeIcon icon={faSearchDollar} /> Review</Link>
-          </Nav.Item> */}
-          {/* <Nav.Item>
+          </Nav.Item>
+          <Nav.Item>
             <Link to="/dashboard/BookList"><FontAwesomeIcon icon={faShoppingCart} /> Book list</Link>
-          </Nav.Item> */}
+          </Nav.Item>
           {isCaterers && <div>
             <Nav.Item>
               <Link to="/dashboard/add-food"><FontAwesomeIcon icon={faPlusCircle} /> Add Menu</Link>
@@ -63,7 +63,7 @@ const SideVarNav = () => {
               <Link to="/dashboard/OrderList"><FontAwesomeIcon icon={faBars} /> Order List</Link>
             </Nav.Item>
             <Nav.Item>
-              <Link to="/dashboard/manageService"><FontAwesomeIcon icon={faTasks} /> Manage Services</Link>
+              <Link to="/dashboard/manage-food-menu"><FontAwesomeIcon icon={faTasks} /> Manage Food Menu</Link>
             </Nav.Item>
           </div>
           }

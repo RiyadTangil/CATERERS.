@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import swal from 'sweetalert';
 import toast from 'react-hot-toast';
-const MangesServiceDetails = ({ service }) => {
+const MenuDetails = ({ service }) => {
 
     const handleDelete = (event, id) => {
         const loading = toast.loading('Please wait...!');
@@ -13,16 +13,16 @@ const MangesServiceDetails = ({ service }) => {
                 toast.dismiss(loading);
                 if (result) {
                     event.target.parentNode.parentNode.style.display = 'none';
-                    return swal("Services deleted ","Services deleted successfully",  "success");
-                 
+                    return swal("Services deleted ", "Services deleted successfully", "success");
+
                 }
                 swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true });
             })
             .catch(error => {
                 toast.dismiss(loading);
                 swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true });
-         
-                
+
+
             })
 
     }
@@ -39,33 +39,24 @@ const MangesServiceDetails = ({ service }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {
-                        service.map((service, index) =>
-
+                    {service.map((service, index) =>
                             <tr>
                                 <td>{index + 1}</td>
                                 <td>{service.name}</td>
                                 <td>{service.description}</td>
                                 <td>{service.price}</td>
-
                                 <td onClick={(e) => handleDelete(e, service._id)} >
-
                                     <button class="btn btn-warning" type="button" >
                                         delete
-                                        </button>
+                                    </button>
                                 </td>
-
                             </tr>
                         )
                     }
-
                 </tbody>
             </table>
-
-
-
         </div>
     );
 };
 
-export default MangesServiceDetails;
+export default MenuDetails;

@@ -18,10 +18,11 @@ import BookList from './Components/BookList/BookList/BookList';
 import Review from './Components/Review/Review';
 import AddCategory from './Components/AddCategory/AddCategory';
 import OrderList from './Components/OrderList/OrderList/OrderList';
-import ManageService from './Components/ManageService/ManageService/ManageService';
+
 import OurCapability from './Components/Home/OutCapability/OurCapability';
 import Profile from "./Components/Dashboard/Profile/Profile";
 import Home from "./pages/Home";
+import ManageFoodMenu from "./Components/ManageFoodMenu/ManageFoodMenu";
 export const UserContext = createContext()
 export const UserOrder = createContext()
 export const UserCard = createContext()
@@ -45,8 +46,8 @@ function App() {
               <Route path="/login">
                 <Login></Login>
               </Route>
-              <Route path="/dashboard/manageService">
-                <ManageService></ManageService>
+              <Route path="/dashboard/manage-food-menu">
+                <ManageFoodMenu/>
               </Route>
               <Route path="/dashboard/orderList">
                 <OrderList></OrderList>

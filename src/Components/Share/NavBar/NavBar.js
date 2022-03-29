@@ -12,8 +12,10 @@ import "./NavBar.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-regular-svg-icons';
 import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
+import Card from './Card';
 const NavBar = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext)
+    const [show, setShow] = useState(false);
     const [cardItems, setCardItems] = useContext(UserCard);
     const handleLogOut = () => {
         sessionStorage.removeItem('token');
@@ -50,9 +52,11 @@ const NavBar = () => {
                             />
                             {/* <Button variant="outline-success">Search</Button> */}
                         </Form>
-                        {loggedInUser.userType === "caterer" && <Link className="px-2 mx-3 text-light text-decoration-none" to="/dashboard/profile">menu</Link>}
-
-                        <Link className="px-2 mx-3 text-light text-decoration-none" > <FontAwesomeIcon icon={faCartArrowDown} /><span className="selected-card">{cardItems.length}</span></Link>
+                        <Link className="px-2 mx-3 text-light text-decoration-none" to="/dashboard/profile">menu</Link>
+                        {/* {loggedInUser.userType === "caterer" && <Link className="px-2 mx-3 text-light text-decoration-none" to="/dashboard/profile">menu</Link>} */}
+                        <Card show={show} setShow={setShow} />
+                        <Link className="px-2 mx-3 text-light text-decoration-none" onClick={() => setShow(true)}>
+                            <FontAwesomeIcon icon={faCartArrowDown} /><span className="selected-card">{cardItems.length}</span></Link>
                         <Nav className=" text-light text-decoration-none p-0 m-0" >
                             {
                                 loggedInUser.email ?

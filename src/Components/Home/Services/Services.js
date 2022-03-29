@@ -13,9 +13,24 @@ const Services = () => {
     const addTOLocalStorage = (id) => {
         addToDatabaseCart(id)
     }
-    const handleCard = (id) => {
-        const previousItems = [...cardItems, id]
-        setCardItems(previousItems)
+    const handleCard = (Id) => {
+
+        const sameProduct = cardItems.find(pd => pd.Id === Id);
+        let count = 1;
+        let newCart;
+        if (sameProduct) {
+            count = sameProduct.quantity + 1;
+            sameProduct.quantity = count;
+            const others = cardItems.filter(pd => pd.Id !== Id);
+            newCart = [...others, sameProduct];
+        }
+        else {
+            const product={Id: Id, quantity: 1}
+     
+            newCart = [...cardItems, product];
+        }
+        setCardItems(newCart);
+
 
     }
     return (
