@@ -7,7 +7,7 @@ import ManageCategory from './ManageCategory';
 const AddCategory = () => {
     const [category, setCategory] = useState(null)
     const [loggedInUser, setLoggedInUser] = useContext(UserContext)
-    console.log(category, loggedInUser)
+    const [reload, setReload] = useState(false)
     const handleAdmin = (e) => {
         e.preventDefault()
         const loading = toast.loading('Please wait...!');
@@ -21,7 +21,9 @@ const AddCategory = () => {
             .then(res => res.json())
             .then(data => {
                 toast.dismiss(loading);
+                
                 if (data) {
+                    setReload(true)
                     return swal("Admin Added", "Admin has been added successful.", "success");
                 }
                 swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true });
@@ -49,10 +51,10 @@ const AddCategory = () => {
                             </div>
 
                         </div>
-                       
+
                     </form>
                 </div>
-                <ManageCategory/>
+                <ManageCategory reload={reload} />
             </div>
         </div>
     );

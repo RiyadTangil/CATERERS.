@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import swal from 'sweetalert';
 import toast from 'react-hot-toast';
-const ManageCategory = () => {
+const ManageCategory = ({reload}) => {
     const [categories, setCategories] = useState([])
     const handleDelete = (e, id) => {
 
@@ -30,7 +30,7 @@ const ManageCategory = () => {
         fetch("http://localhost:5000/category")
             .then(res => res.json())
             .then(data => setCategories(data))
-    }, [])
+    }, [reload])
     return (
         <div style={{ backgroundColor: "#F4FDFB" }} className=" p-5 mt-3 shadow">
             <table className="table table-borderless">

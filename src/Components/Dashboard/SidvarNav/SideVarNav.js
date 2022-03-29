@@ -21,8 +21,8 @@ const SideVarNav = () => {
       return false;
     }
     const decodedToken = jwt_decode(token);
-    const { name, email, picture, userType ,user_id} = decodedToken;
-    const newSignedInUser = { name: name, email: email, img: picture, userType: userType ,user_id: user_id}
+    const { name, email, picture, userType, user_id } = decodedToken;
+    const newSignedInUser = { name: name, email: email, img: picture, userType: userType, user_id: user_id }
     setLoggedInUser(newSignedInUser)
     if (userType === "caterer") {
       setCaterers(true)
@@ -41,32 +41,32 @@ const SideVarNav = () => {
           <Nav.Item>
             <Link to="/dashboard/Profile">  <FontAwesomeIcon icon={faUserCircle} /> Profile</Link>
           </Nav.Item>
-          <Nav.Item>
+          {/* <Nav.Item>
             <Link to="/dashboard/Book">
 
               <FontAwesomeIcon icon={faShoppingBag} />   Book</Link>
-          </Nav.Item>
-          <Nav.Item>
+          </Nav.Item> */}
+          {/* <Nav.Item>
             <Link to="/dashboard/Review"><FontAwesomeIcon icon={faSearchDollar} /> Review</Link>
-          </Nav.Item>
-          <Nav.Item>
+          </Nav.Item> */}
+          {/* <Nav.Item>
             <Link to="/dashboard/BookList"><FontAwesomeIcon icon={faShoppingCart} /> Book list</Link>
-          </Nav.Item>
-          {/* {isCaterers && <div> */}
-          <Nav.Item>
-            <Link to="/dashboard/addService"><FontAwesomeIcon icon={faPlusCircle} /> Add Menu</Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Link to="/dashboard/add-category"><FontAwesomeIcon icon={faPlusCircle} /> Add  Category</Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Link to="/dashboard/OrderList"><FontAwesomeIcon icon={faBars} /> Order List</Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Link to="/dashboard/manageService"><FontAwesomeIcon icon={faTasks} /> Manage Services</Link>
-          </Nav.Item>
-          {/* </div>
-          } */}
+          </Nav.Item> */}
+          {isCaterers && <div>
+            <Nav.Item>
+              <Link to="/dashboard/add-food"><FontAwesomeIcon icon={faPlusCircle} /> Add Menu</Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Link to="/dashboard/add-category"><FontAwesomeIcon icon={faPlusCircle} /> Add  Category</Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Link to="/dashboard/OrderList"><FontAwesomeIcon icon={faBars} /> Order List</Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Link to="/dashboard/manageService"><FontAwesomeIcon icon={faTasks} /> Manage Services</Link>
+            </Nav.Item>
+          </div>
+          }
 
 
 

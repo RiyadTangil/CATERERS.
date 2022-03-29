@@ -25,7 +25,7 @@ const NavBar = () => {
             return false;
         }
         const decodedToken = jwt_decode(token);
-        const { name, email, picture, userType,user_id } = decodedToken;
+        const { name, email, picture, userType, user_id } = decodedToken;
         const newSignedInUser = { name: name, email: email, img: picture, userType: userType, user_id: user_id };
         setLoggedInUser(newSignedInUser)
     }, [])
@@ -50,8 +50,8 @@ const NavBar = () => {
                             />
                             {/* <Button variant="outline-success">Search</Button> */}
                         </Form>
-                        {/* {loggedInUser.userType === "caterer" && <Link className="px-2 mx-3 text-light text-decoration-none" to="/dashboard/profile">menu</Link>} */}
-                        <Link className="px-2 mx-3 text-light text-decoration-none" to="/dashboard/profile">menu</Link>
+                        {loggedInUser.userType === "caterer" && <Link className="px-2 mx-3 text-light text-decoration-none" to="/dashboard/profile">menu</Link>}
+
                         <Link className="px-2 mx-3 text-light text-decoration-none" > <FontAwesomeIcon icon={faCartArrowDown} /><span className="selected-card">{cardItems.length}</span></Link>
                         <Nav className=" text-light text-decoration-none p-0 m-0" >
                             {
@@ -69,9 +69,10 @@ const NavBar = () => {
                                             <p className="text-dark m-0 "><strong>{loggedInUser.name}</strong></p>
                                             <p className="text-dark m-0"><small>{loggedInUser.email}</small></p>
                                             <div className='d-flex flex-column '>
-                                                <Button className="d-block mb-2  main-bg " size="sm">
+                                                <Link className="d-block mb-2  main-bg " size="sm" to="/dashboard/profile"> my profile</Link>
+                                                {/* <Button >
                                                     my profile
-                                                </Button>
+                                                </Button> */}
                                                 <Button className="d-block  main-bg " size="sm">
                                                     my orders
                                                 </Button>

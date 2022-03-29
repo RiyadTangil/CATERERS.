@@ -1,25 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import swal from 'sweetalert';
 import toast from 'react-hot-toast';
 import { useForm } from "react-hook-form";
+import { UserContext } from '../../App';
 import SideVarNav from '../Dashboard/SidvarNav/SideVarNav';
 const containerStyle = {
     backgroundColor: "#F4FDFB",
     // marginRight: "20px"
 }
-const AddService = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+const AddFood = () => {
     const [info, setInfo] = useState({});
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext)
     const [file, setFile] = useState(null);
-    const [categories, setCategories] = useState(null);
+    const [categories, setCategories] = useState([ ]);
     const handleBlur = e => {
         const newInfo = { ...info };
         newInfo[e.target.name] = e.target.value;
+        console.log(newInfo)
         setInfo(newInfo);
     }
     const handleFileChange = (e) => {
         const newFile = e.target.files[0];
-
         setFile(newFile);
     }
     useEffect(() => {
@@ -28,39 +29,47 @@ const AddService = () => {
             .then(data => setCategories(data))
     }, [])
     const onSubmit = (e) => {
-        // const loading = toast.loading('Please wait...!');
-        // e.preventDefault()
-        // const formData = new FormData()
+        const loading = toast.loading('Please wait...!');
+        e.preventDefault()
+        const formData = new FormData()
         // formData.append('file', file);
-        // formData.append('name', info.name);
-        // formData.append('description', info.description);
-        // formData.append('price', info.price);
-        // fetch('https://morning-thicket-61908.herokuapp.com/addService', {
-        //     method: 'POST',
-        //     body: formData
-        // })
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         toast.dismiss(loading);
-        //         if (data) {
-        //             return swal("service Added", "service has been added successful.", "success");
-        //         }
-        //         swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true });
-        //     })
-        //     .catch(error => {
-        //         toast.dismiss(loading);
-        //         swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true });
-        //     })
+        formData.append('name', info.name);
+        formData.append('img', "testing");
+        formData.append('description', info.description);
+        formData.append('price', info.price);
+        formData.append('catererId', loggedInUser.user_id);
+     
+        fetch('http://localhost:5000/foods', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/Json'
+            },
+            body: JSON.stringify({ img: "Testing", "name": info.name, "description":info.description,"price": info.price, "category": info.category, "catererId": loggedInUser.user_id })
+          
+        })
+            .then(response => response.json())
+            .then(data => {
+                toast.dismiss(loading);
+                console.log(data);
+                if (data) {
+                    return swal("service Added", "service has been added successful.", "success");
+                }
+                swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true });
+            })
+            .catch(error => {
+                toast.dismiss(loading);
+                swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true });
+            })
     }
     return (
         <div className="row">
             <SideVarNav></SideVarNav>
             <div className="col-md-9 mt-3">
-                <div style={containerStyle}>
+                <div style={containerStyle} className="shadow">
                     <div className=" p-3   d-flex justify-content-center flex-column">
 
 
-                        <div className="row shadow mt-2 p-3 g-3">
+                        <div className="row  mt-2 p-3 g-3">
 
 
                             <form onSubmit={onSubmit} >
@@ -85,21 +94,11 @@ const AddService = () => {
                                     </div>
 
                                 </div>
-                                <div className="row mt-2 g-3">
-                                    <div className="col form-group">
-                                        <label htmlFor="exampleInputEmail1">Description</label>
-                                        <input type="text" name="description" onBlur={handleBlur} className="form-control" placeholder="Food Description" ></input>
-                                    </div>
-                                    <div className="col">
-                                        <label htmlFor="exampleInputEmail1">Price</label>
-                                        <input type="number" onBlur={handleBlur} name="price" className="form-control" placeholder="Food Price"></input>
-                                    </div>
 
-                                </div>
                                 <div className="row mt-2 g-3">
                                     <div className="col-md-6 col-12">
-                                        <select class="form-select form-select mb-3" aria-label=".form-select-lg example">
-                                            {categories?.map((category, index) => <option key={index} value="1">{category.categoryName}</option>)}
+                                        <select onBlur={handleBlur} className="form-select form-select mb-3" name="category" aria-label=".form-select-lg example">
+                                            {categories?.map((category, index) => <option key={index} value={category.categoryName}>{category.categoryName}</option>)}
 
 
                                         </select>
@@ -117,4 +116,4 @@ const AddService = () => {
     );
 };
 
-export default AddService;
+export default AddFood;

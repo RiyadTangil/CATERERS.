@@ -12,7 +12,7 @@ import { createContext, useState } from 'react';
 import PrivetRoute from './Components/Login/PrivetRoute/PrivetRoute';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Toaster } from 'react-hot-toast';
-import AddService from './Components/AddService/AddService';
+import AddFood from './Components/AddFood/AddFood';
 import Book from './Components/Book/Book/Book';
 import BookList from './Components/BookList/BookList/BookList';
 import Review from './Components/Review/Review';
@@ -52,8 +52,8 @@ function App() {
                 <OrderList></OrderList>
               </Route>
 
-              <Route path="/dashboard/addService">
-                <AddService></AddService>
+              <Route path="/dashboard/add-food">
+            <AddFood></AddFood>
               </Route>
               <Route path="/dashboard/add-category">
                 <AddCategory></AddCategory>
