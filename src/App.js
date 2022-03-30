@@ -10,14 +10,16 @@ import { createContext, useState } from 'react';
 import PrivetRoute from './Components/Login/PrivetRoute/PrivetRoute';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Toaster } from 'react-hot-toast';
-import Book from './Components/Book/Book';
+import Book from './Components/Dashboard/Book/Book';
 import OrderList from './Components/Dashboard/OrderList/OrderList';
 import Profile from "./Components/Dashboard/Profile/Profile";
 import Home from "./pages/Home";
-import ManageFoodMenu from "./Components/ManageFoodMenu/ManageFoodMenu";
-import BookList from "./Components/Book/BookList";
+import ManageFoodMenu from "./Components/Dashboard/ManageFoodMenu/ManageFoodMenu";
+import BookList from "./Components/Dashboard/Book/BookList";
 import AddFood from "./Components/Dashboard/AddFood/AddFood";
 import AddCategory from "./Components/Dashboard/ManageCategory/AddCategory";
+import Test from "./Components/Test";
+
 export const UserContext = createContext()
 export const UserOrder = createContext()
 export const UserCard = createContext()
@@ -49,6 +51,9 @@ function App() {
               </Route>
               <Route path="/dashboard/add-category">
                 <AddCategory />
+              </Route>
+              <Route path="/test">
+                <Test />
               </Route>
               <PrivetRoute path="/dashboard/book">
                 <Book></Book>

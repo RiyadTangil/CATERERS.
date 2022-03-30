@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../../App'
-import SideVarNav from '../Dashboard/SidvarNav/SideVarNav';
+import { UserContext } from '../../../App'
+import SideVarNav from '../SidvarNav/SideVarNav';
 import BookListDetails from './BookListDetails';
 
 const BookList = () => {

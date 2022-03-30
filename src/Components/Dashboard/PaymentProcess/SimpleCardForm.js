@@ -13,8 +13,8 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import swal from 'sweetalert';
 import { useState } from 'react';
-import { UserContext } from '../../App';
-import { UserCard } from '../../App';
+import { UserContext } from '../../../App';
+import { UserCard } from '../../../App';
 
 const SimpleCardForm = ({ order }) => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();

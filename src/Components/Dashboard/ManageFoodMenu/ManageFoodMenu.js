@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import SideVarNav from '../Dashboard/SidvarNav/SideVarNav';
+import SideVarNav from '../SidvarNav/SideVarNav';
 import swal from 'sweetalert';
 import toast from 'react-hot-toast';
 import MangesServiceDetails from './MenuDetails';
@@ -47,7 +47,7 @@ const ManageFoodMenu = () => {
     }
     return (
         <div className="row">
-            <SideVarNav></SideVarNav>
+            <SideVarNav/>
             <div className="col-md-9 mt-5 ">  <h5 className="text-brand">All Service</h5>
                 <div>
                     <table className="table table-borderless">
