@@ -3,12 +3,14 @@ import MangesServiceDetails from './MenuDetails';
 import { Button, Modal } from 'react-bootstrap';
 import swal from 'sweetalert';
 import toast from 'react-hot-toast';
-const EditModal = ({ show, setShow,editId }) => {
+const EditModal = ({ show, setShow, editId }) => {
     const [info, setInfo] = useState({});
     const [file, setFile] = useState(null);
     const handleClose = () => {
         setShow(false);
     }
+    const published = ["published", "unpublished"]
+    const avaiable = ["available", "unavailable"]
     const handleEdit = (id) => {
         console.log(id);
 
@@ -41,6 +43,8 @@ const EditModal = ({ show, setShow,editId }) => {
                 "description": info.description,
                 "price": info.price,
                 "category": info.category,
+                "produceAvailable": info.produceAvailable,
+                "publishStatus": info.publishStatus,
             })
 
         })
@@ -92,12 +96,17 @@ const EditModal = ({ show, setShow,editId }) => {
 
                                 </div>
                                 <div className="row mt-2 g-3">
-                                    <div className="col form-group">
-                                        <label htmlFor="exampleInputEmail1">Description</label>
-                                        <input type="text" name="category" onBlur={handleBlur} className="form-control" placeholder="Food Description" ></input>
-                                    </div>
-                                   
 
+                                    <div className="col-md-6 col-6">
+                                        <select onBlur={handleBlur} className="form-select form-select mb-3" name="publishStatus" aria-label=".form-select-lg example">
+                                            {published?.map((category, index) => <option key={index} value={category}>{category}</option>)}
+                                        </select>
+                                    </div>
+                                    <div className="col-md-6 col-6">
+                                        <select onBlur={handleBlur} className="form-select form-select mb-3" name="produceAvailable" aria-label=".form-select-lg example">
+                                            {avaiable?.map((category, index) => <option key={index} value={category}>{category}</option>)}
+                                        </select>
+                                    </div>
                                 </div>
                                 <div className="col-12 d-flex justify-content-end mt-2">
                                     < button type="submit" className="btn main-bg">Submit</button>

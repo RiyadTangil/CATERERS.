@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import FoodDetails from '../FoodDetails/FoodDetails';
 import { addToDatabaseCart } from '../../../utilities/databaseManager';
 import { UserCard } from '../../../App';
-const Services = () => {
+const Foods = () => {
     const [cardItems, setCardItems] = useContext(UserCard);
     const [allFood, setAllFood] = useState([])
     useEffect(() => {
@@ -46,7 +46,7 @@ const Services = () => {
                             <span className="visually-hidden">Loading...</span>
                         </div>
                     </div> :
-                    <div className="w-75 row mt-5 ">
+                    <div className="w-75 row mt-5 g-2 ">
                         {
                             allFood.map(food => <FoodDetails addTOLocalStorage={addTOLocalStorage} food={food} handleCard={handleCard} key={food.name}></FoodDetails>)
                         }
@@ -57,4 +57,4 @@ const Services = () => {
     );
 };
 
-export default Services;
+export default Foods;

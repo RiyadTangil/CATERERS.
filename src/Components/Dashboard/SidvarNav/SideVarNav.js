@@ -13,6 +13,7 @@ const SideVarNav = () => {
 
   const [loggedInUser, setLoggedInUser] = useContext(UserContext)
   const [isCaterers, setCaterers] = useState(false);
+  const [admin, setAdmin] = useState(false);
 
 
   useEffect(() => {
@@ -21,10 +22,14 @@ const SideVarNav = () => {
       return false;
     }
     const decodedToken = jwt_decode(token);
-    const { name, email, picture, userType, user_id } = decodedToken;
-    const newSignedInUser = { name: name, email: email, img: picture, userType: userType, user_id: user_id }
+    const { name, email, picture, userType, user_id, address } = decodedToken;
+    const newSignedInUser = { name: name, email: email, img: picture, userType: userType, user_id: user_id, address: address }
     setLoggedInUser(newSignedInUser)
     if (userType === "caterer") {
+      setCaterers(true)
+    }
+    else if (userType === "admin") {
+      setAdmin(true)
       setCaterers(true)
     }
 
@@ -50,9 +55,9 @@ const SideVarNav = () => {
             <Link to="/dashboard/Review"><FontAwesomeIcon icon={faSearchDollar} /> Review</Link>
           </Nav.Item>
           <Nav.Item>
-            <Link to="/dashboard/BookList"><FontAwesomeIcon icon={faShoppingCart} /> Book list</Link>
+            <Link to="/dashboard/BookList"><FontAwesomeIcon icon={faShoppingCart} /> My Orders</Link>
           </Nav.Item>
-          {isCaterers && <div>
+          {isCaterers && <>
             <Nav.Item>
               <Link to="/dashboard/add-food"><FontAwesomeIcon icon={faPlusCircle} /> Add Menu</Link>
             </Nav.Item>
@@ -60,15 +65,15 @@ const SideVarNav = () => {
               <Link to="/dashboard/add-category"><FontAwesomeIcon icon={faPlusCircle} /> Add  Category</Link>
             </Nav.Item>
             <Nav.Item>
-              <Link to="/dashboard/OrderList"><FontAwesomeIcon icon={faBars} /> Order List</Link>
-            </Nav.Item>
-            <Nav.Item>
               <Link to="/dashboard/manage-food-menu"><FontAwesomeIcon icon={faTasks} /> Manage Food Menu</Link>
             </Nav.Item>
-          </div>
+          </>
           }
-
-
+          {admin &&
+            <Nav.Item>
+              <Link to="/dashboard/OrderList"><FontAwesomeIcon icon={faBars} /> Order List</Link>
+            </Nav.Item>
+          }
 
           <Nav.Item>
             <Link to="/"><FontAwesomeIcon icon={faHome} /> Home page</Link>

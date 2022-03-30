@@ -45,7 +45,7 @@ const ManageCategory = ({ reload }) => {
                 <tbody>
                     {
                         categories?.map((category, index) =>
-                            <tr className="border shadow-sm p-2 my-3 rounded-2">np
+                            <tr className="border shadow-sm p-2 my-3 rounded-2">
                                 <td>{index + 1}</td>
                                 <td>{category.categoryName}</td>
 

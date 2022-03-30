@@ -27,8 +27,8 @@ const NavBar = () => {
             return false;
         }
         const decodedToken = jwt_decode(token);
-        const { name, email, picture, userType, user_id } = decodedToken;
-        const newSignedInUser = { name: name, email: email, img: picture, userType: userType, user_id: user_id };
+        const { name, email, picture, userType, user_id ,address} = decodedToken;
+        const newSignedInUser = { name: name, email: email, img: picture, userType: userType, user_id: user_id ,address:address};
         setLoggedInUser(newSignedInUser)
     }, [])
 

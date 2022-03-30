@@ -11,6 +11,8 @@ const containerStyle = {
 const AddFood = () => {
     const [info, setInfo] = useState({});
     const [file, setFile] = useState(null);
+    const published = ["published", "unpublished"]
+    const avaiable = ["available", "unavailable"]
     const [loggedInUser, setLoggedInUser] = useContext(UserContext)
     const [categories, setCategories] = useState([]);
     const handleBlur = e => {
@@ -28,6 +30,7 @@ const AddFood = () => {
             .then(res => res.json())
             .then(data => setCategories(data))
     }, [])
+    console.log(info);
     const onSubmit = (e) => {
         const loading = toast.loading('Please wait...!');
         e.preventDefault()
@@ -50,7 +53,10 @@ const AddFood = () => {
                 "description": info.description,
                 "price": info.price,
                 "category": info.category,
-                "catererId": loggedInUser.user_id
+                "catererId": loggedInUser.user_id,
+                "produceAvailable": info.produceAvailable,
+                "publishStatus": info.publishStatus,
+                "catererId": loggedInUser.user_id,
             })
 
         })
@@ -58,7 +64,7 @@ const AddFood = () => {
             .then(data => {
                 toast.dismiss(loading);
                 console.log(data);
-                if (data) {
+                if (!data.error) {
                     return swal("service Added", "service has been added successful.", "success");
                 }
                 swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true });
@@ -102,8 +108,16 @@ const AddFood = () => {
                                     <div className="col-md-6 col-12">
                                         <select onBlur={handleBlur} className="form-select form-select mb-3" name="category" aria-label=".form-select-lg example">
                                             {categories?.map((category, index) => <option key={index} value={category.categoryName}>{category.categoryName}</option>)}
-
-
+                                        </select>
+                                    </div>
+                                    <div className="col-md-3 col-6">
+                                        <select onBlur={handleBlur} className="form-select form-select mb-3" name="publishStatus" aria-label=".form-select-lg example">
+                                            {published?.map((category, index) => <option key={index} value={category}>{category}</option>)}
+                                        </select>
+                                    </div>
+                                    <div className="col-md-3 col-6">
+                                        <select onBlur={handleBlur} className="form-select form-select mb-3" name="produceAvailable" aria-label=".form-select-lg example">
+                                            {avaiable?.map((category, index) => <option key={index} value={category}>{category}</option>)}
                                         </select>
                                     </div>
                                 </div>
