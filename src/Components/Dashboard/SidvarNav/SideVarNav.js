@@ -14,6 +14,7 @@ const SideVarNav = () => {
   const [loggedInUser, setLoggedInUser] = useContext(UserContext)
   const [isCaterers, setCaterers] = useState(false);
   const [admin, setAdmin] = useState(false);
+  const [customer, seCustomer] = useState(false);
 
 
   useEffect(() => {
@@ -33,6 +34,12 @@ const SideVarNav = () => {
       setCaterers(true)
     }
 
+    else if (userType === "customer") {
+
+      seCustomer(true)
+    }
+
+
   }, [])
 
 
@@ -46,14 +53,10 @@ const SideVarNav = () => {
           <Nav.Item>
             <Link to="/dashboard/Profile">  <FontAwesomeIcon icon={faUserCircle} /> Profile</Link>
           </Nav.Item>
-          <Nav.Item>
+          {/* <Nav.Item>
             <Link to="/dashboard/Book">
-
               <FontAwesomeIcon icon={faShoppingBag} />   Book</Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Link to="/dashboard/Review"><FontAwesomeIcon icon={faSearchDollar} /> Review</Link>
-          </Nav.Item>
+          </Nav.Item> */}
           <Nav.Item>
             <Link to="/dashboard/BookList"><FontAwesomeIcon icon={faShoppingCart} /> My Orders</Link>
           </Nav.Item>

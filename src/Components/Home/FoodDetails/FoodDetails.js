@@ -30,7 +30,7 @@ const FoodDetails = ({ food, handleCard }) => {
                     <h4 class="card-text fw-bold text-warning text-capitalize">{food.foodName}</h4>
                     <div class="d-flex justify-content-between">
                         <h6 class="card-text fw-bold text-capitalize ">{food.category}</h6>
-                        <h6 class="card-text fw-bold text-warning">{4.89}</h6>
+                        <h6 class="card-text fw-bold text-warning"> ${food.foodPrice}</h6>
                     </div>
                     <div className="py-2 ">
                         <button onClick={() => handleCard(food)} className="btn  submitButton">

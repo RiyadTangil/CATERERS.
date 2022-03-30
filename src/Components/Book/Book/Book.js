@@ -20,23 +20,16 @@ const Book = () => {
         setPaymentId(id)
         setShowPaymentBTn(true)
     }
-
-
     return (
-
-        <div className="row">
-            <SideVarNav></SideVarNav>
-            <div className="col-md-9 mt-5 ">
+        <div className="row  d-flex justify-content-center" >
+     
+            <div className="col-md-10 mt-5 ">
 
                 <div style={{ backgroundColor: "#F4FDFB" }} className="shadow pt-5 px-5">
                     <div className=" d-flex   justify-content-center  flex-column">
                         <Elements stripe={stripePromise}>
                             <SimpleCardForm order={order}></SimpleCardForm>
                         </Elements>
-
-
-                       
-
                        
                     </div>
 

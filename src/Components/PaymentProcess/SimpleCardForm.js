@@ -8,6 +8,7 @@ import {
   useElements
 } from '@stripe/react-stripe-js';
 import axios from 'axios';
+import { useHistory,  } from "react-router";
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import swal from 'sweetalert';
@@ -24,6 +25,7 @@ const SimpleCardForm = ({ order }) => {
   const [paymentSuccess, setPaymentSuccess] = useState(null);
   const [cardItems, setCardItems] = useContext(UserCard);
   const total = cardItems.reduce((total, prd) => total + (prd.foodPrice * prd.quantity), 0)
+  let history = useHistory();
   const forDatabase = cardItems.map(item => {
     return {
         foodId: item._id,
@@ -59,6 +61,7 @@ const SimpleCardForm = ({ order }) => {
         toast.dismiss(loading);
         if (res.data) {
           setCardItems([]);
+          history.push("/dashboard/bookList");
           return swal("Payment successful", "Your booking and payment has been successful.", "success");
         }
         swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true });
