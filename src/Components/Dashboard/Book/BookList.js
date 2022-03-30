@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../../../App'
-import SideVarNav from '../../Dashboard/SidvarNav/SideVarNav';
+import { UserContext } from '../../App'
+import SideVarNav from '../Dashboard/SidvarNav/SideVarNav';
 import BookListDetails from './BookListDetails';
 
 const BookList = () => {
@@ -19,7 +19,7 @@ const BookList = () => {
     return (
 
         <div className="row">
-            <SideVarNav></SideVarNav>
+            <SideVarNav/>
             <div className="col-md-9">
                 <div className=" p-4 pr-5" style={{ backgroundColor: "#F4FDFB" }}>
                     <div className="d-flex justify-content-center ">
@@ -29,7 +29,7 @@ const BookList = () => {
                             </div>
                         </div>}
                         {bookingList?.length < 1 && isLoading ?
-                            <h1>No order placed yet.....{loggedInUser.user_id} </h1>
+                            <h1>No order placed yet..... </h1>
                             :bookingList?.length > 0 && isLoading ?
                             <div className=" row   mt-5 pt-5">
                                 {

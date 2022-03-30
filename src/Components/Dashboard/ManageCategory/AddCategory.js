@@ -1,10 +1,13 @@
 import React, { useContext, useState } from 'react';
 import swal from 'sweetalert';
 import toast from 'react-hot-toast';
-import SideVarNav from '../Dashboard/SidvarNav/SideVarNav';
-import { UserContext } from '../../App';
+import { UserContext } from '../../../App';
+import SideVarNav from '../SidvarNav/SideVarNav';
 import ManageCategory from './ManageCategory';
+// import ManageCategory from '../AddCategory/ManageCategory';
+
 const AddCategory = () => {
+
     const [category, setCategory] = useState(null)
     const [loggedInUser, setLoggedInUser] = useContext(UserContext)
     const [reload, setReload] = useState(false)
@@ -21,7 +24,7 @@ const AddCategory = () => {
             .then(res => res.json())
             .then(data => {
                 toast.dismiss(loading);
-                
+
                 if (data) {
                     setReload(true)
                     return swal("Admin Added", "Admin has been added successful.", "success");

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import SideVarNav from '../../Dashboard/SidvarNav/SideVarNav';
+import SideVarNav from '../SidvarNav/SideVarNav';
+
 const OrderList = () => {
     const [orderList, setOrderList] = useState([])
     const [show, setShow] = useState(false)
@@ -38,7 +39,7 @@ const OrderList = () => {
     }
     return (
         <div className="row">
-            <SideVarNav></SideVarNav>
+            <SideVarNav/>
             <div className="col-md-9 ">
                 <div className=" p-4 pr-5" style={{ backgroundColor: "#F4FDFB" }}>
                     <h5 className="text-brand">All Orders</h5>

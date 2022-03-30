@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import swal from 'sweetalert';
 import toast from 'react-hot-toast';
 import { useForm } from "react-hook-form";
-import { UserContext } from '../../App';
-import SideVarNav from '../Dashboard/SidvarNav/SideVarNav';
+import { UserContext } from '../../../App';
+import SideVarNav from '../SidvarNav/SideVarNav';
 const containerStyle = {
     backgroundColor: "#F4FDFB",
     // marginRight: "20px"
