@@ -12,7 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Toaster } from 'react-hot-toast';
 import Book from './Components/Dashboard/Book/Book';
 import OrderList from './Components/Dashboard/OrderList/OrderList';
-import Profile from "./Components/Dashboard/Profile/Profile";
+
 import Home from "./pages/Home";
 import ManageFoodMenu from "./Components/Dashboard/ManageFoodMenu/ManageFoodMenu";
 import BookList from "./Components/Dashboard/Book/BookList";
@@ -21,6 +21,7 @@ import AddCategory from "./Components/Dashboard/ManageCategory/AddCategory";
 import Test from "./Components/Test";
 import Restaurant from "./Components/Dashboard/Restaurant/Restaurant";
 import RestaurantDetails from "./pages/RestaurantDetails";
+import Profile from "./Components/Dashboard/Profile/Profile";
 
 export const UserContext = createContext()
 export const UserOrder = createContext()
@@ -67,7 +68,7 @@ function App() {
                 <Book></Book>
               </PrivetRoute>
               <PrivetRoute path="/dashboard/profile">
-                <Profile></Profile>
+                <Profile/>
               </PrivetRoute>
               <Route path="/dashboard/bookList">
                 <BookList />
