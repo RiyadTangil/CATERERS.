@@ -4,6 +4,22 @@
     height:650px;
     
 }
+
+.section-title{
+    color:rgb(0, 156, 134);
+  }
+  .main-bg{
+    background-color:rgb(0, 156, 134)!important;
+    color: aliceblue!important;
+  }
+  .hero-container{
+    height:700px;
+   background-repeat: no-repeat;
+   background-size: cover;
+    width:100%;
+    background-image: url("https://cdn.pixabay.com/photo/2017/01/26/02/06/platter-2009590_1280.jpg");
+  }
+  
 .hero-img-section{
     overflow: hidden !important;
 }

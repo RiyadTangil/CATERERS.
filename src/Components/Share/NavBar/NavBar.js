@@ -12,9 +12,10 @@ import "./NavBar.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-regular-svg-icons';
 import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
-
+import Card from './Card';
 const NavBar = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext)
+    const [show, setShow] = useState(false);
     const [cardItems, setCardItems] = useContext(UserCard);
     const handleLogOut = () => {
         sessionStorage.removeItem('token');
@@ -25,11 +26,9 @@ const NavBar = () => {
         if (!token) {
             return false;
         }
-        console.log(token);
         const decodedToken = jwt_decode(token);
-        console.log(decodedToken);
-        const { name, email, picture, userType } = decodedToken;
-        const newSignedInUser = { name: name, email: email, img: picture, userType: userType }
+        const { name, email, picture, userType, user_id ,address} = decodedToken;
+        const newSignedInUser = { name: name, email: email, img: picture, userType: userType, user_id: user_id ,address:address};
         setLoggedInUser(newSignedInUser)
     }, [])
 
@@ -51,8 +50,11 @@ const NavBar = () => {
                                 aria-label="Search"
                             />
                         </Form>
-                        {loggedInUser.userType === "caterer" && <Link className="px-2 mx-3 text-light text-decoration-none" to="/">menu</Link>}
-                        <Link className="px-2 mx-3 text-light text-decoration-none" > <FontAwesomeIcon icon={faCartArrowDown} /><span className="selected-card">{cardItems.length}</span></Link>
+                        <Link className="px-2 mx-3 text-light text-decoration-none" to="/dashboard/profile">menu</Link>
+                        {/* {loggedInUser.userType === "caterer" && <Link className="px-2 mx-3 text-light text-decoration-none" to="/dashboard/profile">menu</Link>} */}
+                        <Card show={show} setShow={setShow} cardItems={cardItems} />
+                        <Link className="px-2 mx-3 text-light text-decoration-none" onClick={() => setShow(true)}>
+                            <FontAwesomeIcon icon={faCartArrowDown} /><span className="selected-card">{cardItems.length}</span></Link>
                         <Nav className=" text-light text-decoration-none p-0 m-0" >
                             {
                                 loggedInUser.email ?
@@ -69,16 +71,17 @@ const NavBar = () => {
                                             <p className="text-dark m-0 "><strong>{loggedInUser.name}</strong></p>
                                             <p className="text-dark m-0"><small>{loggedInUser.email}</small></p>
                                             <div className='d-flex flex-column '>
-                                                <Button className="d-block mb-2  main-bg " size="sm">
-                                                    My profile
-                                                </Button>
-                                                <Button className="d-block  main-bg "  size="sm">
-                                                    My orders
+                                                <Link className="d-block mb-2  main-bg " size="sm" to="/dashboard/profile"> my profile</Link>
+                                                {/* <Button >
+                                                    my profile
+                                                </Button> */}
+                                                <Button className="d-block  main-bg " size="sm">
+                                                    my orders
                                                 </Button>
                                                 {loggedInUser.userType === "caterer" &&
-                                                <Button className="d-block mt-2 main-bg"  size="sm">
-                                                    My menu
-                                                </Button>}
+                                                    <Button className="d-block mt-2 main-bg" size="sm">
+                                                        my menu
+                                                    </Button>}
                                             </div>
                                             <button onClick={handleLogOut} className="btn btn-outline-danger w-100 mt-4">Log Out?</button>
                                         </div>
