@@ -16,7 +16,7 @@ const Profile = () => {
                         <div className=" row   mt-5 pt-5">
                             <div className="col-md-6 col-sm-12">
                                 <div class="card text-center ">
-                                    <h1 class="text-muted bg-light">Profile</h1>
+                                    <h1 class="text-muted bg-light">Profile </h1>
                                     <div style={{borderRadius:"50%"}} class="text-center ">
                                         <img style={{ width: "150px" ,borderRadius:"50%"}} src={loggedInUser.img ||man} class="   card-img-top" alt="..."></img>
                                     </div>
