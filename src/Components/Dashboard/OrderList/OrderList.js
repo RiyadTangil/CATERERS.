@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { UserContext } from '../../../App';
 import SideVarNav from '../SidvarNav/SideVarNav';
 
 const OrderList = () => {
     const [orderList, setOrderList] = useState([])
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext)
     const [show, setShow] = useState(false)
     useEffect(() => {
-        fetch("http://localhost:5000/orders")
+        fetch(`http://localhost:5000/orders/my-orders/${loggedInUser.user_id}`)
             .then(res => res.json())
             .then(data => setOrderList(data))
 

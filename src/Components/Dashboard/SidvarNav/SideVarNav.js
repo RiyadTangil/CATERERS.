@@ -70,12 +70,12 @@ const SideVarNav = () => {
             <Nav.Item>
               <Link to="/dashboard/manage-food-menu"><FontAwesomeIcon icon={faTasks} /> Manage Food Menu</Link>
             </Nav.Item>
-          </>
-          }
-          {admin &&
+          
+         
             <Nav.Item>
               <Link to="/dashboard/OrderList"><FontAwesomeIcon icon={faBars} /> Order List</Link>
             </Nav.Item>
+            </>
           }
 
           <Nav.Item>

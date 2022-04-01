@@ -4,7 +4,7 @@ import SideVarNav from '../SidvarNav/SideVarNav';
 import BookListDetails from './BookListDetails';
 
 const BookList = () => {
-    const [bookingList, setBookingList] = useState([ ])
+    const [bookingList, setBookingList] = useState([])
     const [loggedInUser, setLoggedInUser] = useContext(UserContext)
     const [isLoading, setIsLoading] = useState(false)
     useEffect(() => {
@@ -19,7 +19,7 @@ const BookList = () => {
     return (
 
         <div className="row">
-            <SideVarNav/>
+            <SideVarNav />
             <div className="col-md-9">
                 <div className=" p-4 pr-5" style={{ backgroundColor: "#F4FDFB" }}>
                     <div className="d-flex justify-content-center ">
@@ -30,12 +30,13 @@ const BookList = () => {
                         </div>}
                         {bookingList?.length < 1 && isLoading ?
                             <h1>No order placed yet..... </h1>
-                            :bookingList?.length > 0 && isLoading ?
-                            <div className=" row   mt-5 pt-5">
-                                {
-                                    bookingList?.map(booking => <BookListDetails booking={booking}></BookListDetails>)
-                                }
-                            </div>:null
+                            : bookingList?.length > 0 && isLoading ?
+                                <div className=" row   mt-5 pt-5">
+                                    {
+
+                                        bookingList?.map(booking => <BookListDetails orderLength={bookingList.length} booking={booking}></BookListDetails>)
+                                    }
+                                </div> : null
 
                         }
                     </div>

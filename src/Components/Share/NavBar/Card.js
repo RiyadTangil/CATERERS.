@@ -33,7 +33,7 @@ const Card = ({ show, setShow }) => {
                         {cardItems.map((items, index) => (
                             <div class="row  shadow my-2 g-0" key={index}>
                                 <div class="col-md-4">
-                                    <img src="https://img.freepik.com/free-photo/concept-indian-cuisine-baked-chicken-wings-legs-honey-mustard-sauce-serving-dishes-restaurant-black-plate-indian-spices-wooden-table-background-image_127425-18.jpg?size=626&ext=jpg" class="img-fluid rounded-start" alt="..."></img>
+                                    <img src={items.foodImg} class="img-fluid rounded-start" alt="..."></img>
                                 </div>
                                 <div class="col-md-8">
 

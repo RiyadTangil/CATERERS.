@@ -10,29 +10,8 @@ const Foods = () => {
             .then(res => res.json())
             .then(data => setAllRestaurant(data))
     }, [])
-    const addTOLocalStorage = (id) => {
-        addToDatabaseCart(id)
-    }
-    const handleCard = (food) => {
+ 
 
-        const sameProduct = cardItems.find(pd => pd._id === food._id);
-        let count = 1;
-        let newCart;
-        if (sameProduct) {
-            count = sameProduct.quantity + 1;
-            sameProduct.quantity = count;
-            const others = cardItems.filter(pd => pd._id !== food._id);
-            newCart = [...others, sameProduct];
-        }
-        else {
-            food.quantity = 1
-
-            newCart = [...cardItems, food];
-        }
-        setCardItems(newCart);
-
-
-    }
     return (
         <section style={{ backgroundColor: "#E3E3E3" }} className="service-container">
             <div className="text-center pt-5">
@@ -48,7 +27,7 @@ const Foods = () => {
                     </div> :
                     <div className="w-75 row mt-5 g-2 ">
                         {
-                            restaurants?.map(restaurant => <FoodDetails  restaurant={restaurant} handleCard={handleCard} key={restaurant._id}></FoodDetails>)
+                            restaurants?.map(restaurant => <FoodDetails  restaurant={restaurant}  key={restaurant._id}></FoodDetails>)
                         }
                     </div>
                 }

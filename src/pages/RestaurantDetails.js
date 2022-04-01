@@ -5,8 +5,10 @@ import RestaurantNavbar from '../Components/RestaurantNavbar/RestaurantNavbar';
 import NavBar from '../Components/Share/NavBar/NavBar';
 
 const RestaurantDetails = () => {
- 
-    window.scrollTo(0, 0);
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [])
+
     return (
         <div >
             <NavBar />

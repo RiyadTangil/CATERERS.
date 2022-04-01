@@ -1,8 +1,8 @@
 import React from 'react';
-const BookListDetails = ({ booking }) => {
+const BookListDetails = ({ booking ,orderLength}) => {
     const statusStyle = `text-light p-2 rounded-3 ${booking.status === 'Done' ? 'bg-success' : booking.status === 'Pending' ? 'bg-danger' : 'bg-warning'}`
     return (
-        <div className="col-md-6 col-sm-12">
+        <div className={` ${orderLength==1?"col-md-12":"col-md-6"} col-sm-12`}>
             <div class="card mb-3">
                 <div class="row g-0">
                     <div class="col-md-4">

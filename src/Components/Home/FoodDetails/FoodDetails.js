@@ -12,8 +12,8 @@ const FoodDetails = ({ restaurant, handleCard }) => {
                 <div className="card-body">
                     <h4 className="card-text fw-bold text-warning text-capitalize">{restaurant.name}</h4>
                     <div className="d-flex justify-content-between">
-                        <h6 className="card-text fw-bold text-capitalize ">{restaurant.category}</h6>
-                        <h6 className="card-text fw-bold text-warning"> ${restaurant.foodPrice}</h6>
+                        <h6 className="card-text fw-bold text-capitalize ">{restaurant.category||"Caterer Name"}</h6>
+                        <h6 className="card-text fw-bold text-warning"> {restaurant.foodPrice||"Rating -4.8"}</h6>
                     </div>
                     {/* <div className="py-2 ">
                         <button onClick={() => handleCard(restaurant)} className="btn  submitButton">
