@@ -19,6 +19,8 @@ import BookList from "./Components/Dashboard/Book/BookList";
 import AddFood from "./Components/Dashboard/AddFood/AddFood";
 import AddCategory from "./Components/Dashboard/ManageCategory/AddCategory";
 import Test from "./Components/Test";
+import Restaurant from "./Components/Dashboard/Restaurant/Restaurant";
+import RestaurantDetails from "./pages/RestaurantDetails";
 
 export const UserContext = createContext()
 export const UserOrder = createContext()
@@ -55,6 +57,12 @@ function App() {
               <Route path="/test">
                 <Test />
               </Route>
+              <Route path="/restaurant/:id">
+                <RestaurantDetails />
+              </Route>
+              {/* <Route path="/restaurant/:id">
+                <Restaurant />
+              </Route> */}
               <PrivetRoute path="/dashboard/book">
                 <Book></Book>
               </PrivetRoute>

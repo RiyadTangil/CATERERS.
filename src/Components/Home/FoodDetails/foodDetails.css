@@ -17,6 +17,9 @@
 	transition: background 0.8s ease;
 	margin: 0 auto;
 }
+.rest-card{
+	cursor: pointer;
+}
 .submitButton:hover {
 	background: rgba(100, 0, 0, 0.03);
 }

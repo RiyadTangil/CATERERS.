@@ -1,8 +1,19 @@
-*{
-  font-family: 'Poppins', sans-serif;
+* {
+  font-family: "Poppins", sans-serif;
 }
 .App {
   text-align: center;
+}
+.primary-btn{
+  background-color: #ffb03b !important;
+  color: #fff;
+  letter-spacing: 1px;
+  transition: all 0.3s ease-in-out;
+  text-transform: uppercase;
+}
+.primary-btn:hover {
+  color: #fff;
+  background-color: #fa4877;
 }
 
 .App-logo {
@@ -27,7 +38,6 @@
   color: white;
 }
 
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -37,13 +47,12 @@
   }
 }
 
-
 .svg-wrapper {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
-	  margin: 0 auto;
-  width: 320px;  
+  margin: 0 auto;
+  width: 320px;
 }
 .shape {
   stroke-dasharray: 140 540;
@@ -55,7 +64,7 @@
   transition: stroke-width 1s, stroke-dashoffset 1s, stroke-dasharray 1s;
 }
 .text {
-  font-family: 'Roboto Condensed';
+  font-family: "Roboto Condensed";
   font-size: 22px;
   line-height: 32px;
   letter-spacing: 8px;
@@ -68,5 +77,3 @@
   stroke-dashoffset: 0;
   stroke-dasharray: 760;
 }
-
-

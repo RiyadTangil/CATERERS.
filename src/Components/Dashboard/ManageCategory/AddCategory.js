@@ -19,7 +19,7 @@ const AddCategory = () => {
             headers: {
                 'Content-Type': 'application/Json'
             },
-            body: JSON.stringify({ "email": loggedInUser.email, "categoryName": category })
+            body: JSON.stringify({ "email": loggedInUser.email, "categoryName": category,id:loggedInUser.user_id })
         })
             .then(res => res.json())
             .then(data => {

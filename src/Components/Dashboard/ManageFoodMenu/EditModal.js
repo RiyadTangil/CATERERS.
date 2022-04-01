@@ -3,18 +3,16 @@ import MangesServiceDetails from './MenuDetails';
 import { Button, Modal } from 'react-bootstrap';
 import swal from 'sweetalert';
 import toast from 'react-hot-toast';
+import axios from 'axios';
 const EditModal = ({ show, setShow, editId }) => {
     const [info, setInfo] = useState({});
-    const [file, setFile] = useState(null);
+    const [imgLink, setFile] = useState(null);
+    const [imgUploading, setImgUpload] = useState(false)
     const handleClose = () => {
         setShow(false);
     }
     const published = ["published", "unpublished"]
     const avaiable = ["available", "unavailable"]
-    const handleEdit = (id) => {
-        console.log(id);
-
-    }
     const handleBlur = e => {
         const newInfo = { ...info };
         newInfo[e.target.name] = e.target.value;
@@ -23,12 +21,26 @@ const EditModal = ({ show, setShow, editId }) => {
     }
     const handleFileChange = (e) => {
         const newFile = e.target.files[0];
-        setFile(newFile);
+        const imageData = new FormData();
+        imageData.set('key', '8ece3963cdc5195811f654de65d90034');
+        imageData.append('image', newFile);
+        //axios copied code form git hub search results of google
+        setImgUpload(true)
+        axios.post('https://api.imgbb.com/1/upload',
+            imageData)
+            .then(function (response) {
+                setFile(response.data.data.display_url);
+                setImgUpload(false)
+            })
+            .catch(function (error) {
+                console.log(error);
+                setImgUpload(false)
+            });
+
     }
     const containerStyle = {
         backgroundColor: "#F4FDFB",
     }
-    console.log(info.name);
     const onSubmit = (e) => {
         const loading = toast.loading('Please wait...!');
         e.preventDefault()
@@ -38,7 +50,7 @@ const EditModal = ({ show, setShow, editId }) => {
                 'Content-Type': 'application/Json'
             },
             body: JSON.stringify({
-                "img": "Testing",
+                "img": imgLink,
                 "name": info.name,
                 "description": info.description,
                 "price": info.price,
@@ -51,7 +63,6 @@ const EditModal = ({ show, setShow, editId }) => {
             .then(response => response.json())
             .then(data => {
                 toast.dismiss(loading);
-                console.log(data);
                 if (data) {
                     return swal("service Added", "service has been added successful.", "success");
                 }
@@ -109,7 +120,17 @@ const EditModal = ({ show, setShow, editId }) => {
                                     </div>
                                 </div>
                                 <div className="col-12 d-flex justify-content-end mt-2">
-                                    < button type="submit" className="btn main-bg">Submit</button>
+                                    {!imgUploading ?
+
+                                        < button type="submit" className="btn main-bg">Submit</button> :
+
+                                        <button class="btn btn-primary" type="button" disabled>
+                                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                            uploading
+                                        </button>
+
+                                    }
+
                                 </div>
                             </form>
                         </div>

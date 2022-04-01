@@ -4,16 +4,18 @@ import toast from 'react-hot-toast';
 import { useForm } from "react-hook-form";
 import { UserContext } from '../../../App';
 import SideVarNav from '../SidvarNav/SideVarNav';
+import axios from 'axios';
 const containerStyle = {
     backgroundColor: "#F4FDFB",
     // marginRight: "20px"
 }
 const AddFood = () => {
     const [info, setInfo] = useState({});
-    const [file, setFile] = useState(null);
     const published = ["published", "unpublished"]
     const avaiable = ["available", "unavailable"]
     const [loggedInUser, setLoggedInUser] = useContext(UserContext)
+    const [imgLink, setFile] = useState(null);
+    const [imgUploading, setImgUpload] = useState(false)
     const [categories, setCategories] = useState([]);
     const handleBlur = e => {
         const newInfo = { ...info };
@@ -23,10 +25,26 @@ const AddFood = () => {
     }
     const handleFileChange = (e) => {
         const newFile = e.target.files[0];
-        setFile(newFile);
+        const imageData = new FormData();
+        imageData.set('key', '8ece3963cdc5195811f654de65d90034');
+        imageData.append('image', newFile);
+        //axios copied code form git hub search results of google
+        setImgUpload(true)
+        axios.post('https://api.imgbb.com/1/upload',
+            imageData)
+            .then(function (response) {
+                setFile(response.data.data.display_url);
+                setImgUpload(false)
+            })
+            .catch(function (error) {
+                console.log(error);
+                setImgUpload(false)
+            });
+
+
     }
     useEffect(() => {
-        fetch("http://localhost:5000/category")
+        fetch(`http://localhost:5000/category/categoryByUser/${loggedInUser.user_id}`)
             .then(res => res.json())
             .then(data => setCategories(data))
     }, [])
@@ -34,29 +52,21 @@ const AddFood = () => {
     const onSubmit = (e) => {
         const loading = toast.loading('Please wait...!');
         e.preventDefault()
-        const formData = new FormData()
-        // formData.append('file', file);
-        // formData.append('name', info.name);
-        // formData.append('img', "testing");
-        // formData.append('description', info.description);
-        // formData.append('price', info.price);
-        // formData.append('catererId', loggedInUser.user_id);
-
         fetch('http://localhost:5000/foods', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/Json'
             },
             body: JSON.stringify({
-                img: "Testing",
+                "img": imgLink,
                 "name": info.name,
                 "description": info.description,
                 "price": info.price,
-                "category": info.category,
-                "catererId": loggedInUser.user_id,
+                "category": "test",
+                "userId": loggedInUser.user_id,
                 "produceAvailable": info.produceAvailable,
                 "publishStatus": info.publishStatus,
-                "catererId": loggedInUser.user_id,
+                "catererId": info.category,
             })
 
         })
@@ -84,7 +94,7 @@ const AddFood = () => {
                             <form onSubmit={onSubmit} >
                                 <div className="row g-3 ">
                                     <div className="col">
-                                        <label htmlFor="exampleInputEmail1">Food Name</label>
+                                        <label htmlFor="exampleInputEmail1">Food Name </label>
                                         <input type="text" name="name" onBlur={handleBlur} className="form-control" placeholder="Food Name" ></input>
                                     </div>
                                     <div className="col">
@@ -107,7 +117,7 @@ const AddFood = () => {
                                 <div className="row mt-2 g-3">
                                     <div className="col-md-6 col-12">
                                         <select onBlur={handleBlur} className="form-select form-select mb-3" name="category" aria-label=".form-select-lg example">
-                                            {categories?.map((category, index) => <option key={index} value={category.categoryName}>{category.categoryName}</option>)}
+                                            {categories?.map((category, index) => <option key={index} value={category._id}>{category.categoryName}</option>)}
                                         </select>
                                     </div>
                                     <div className="col-md-3 col-6">
@@ -122,7 +132,17 @@ const AddFood = () => {
                                     </div>
                                 </div>
                                 <div className="col-12 d-flex justify-content-end mt-2">
-                                    < button type="submit" className="btn main-bg">Submit</button>
+                                    {imgLink ?
+
+                                        < button type="submit" className="btn main-bg">Submit</button> :
+                                        imgLink === null & imgUploading ?
+                                            <button class="btn btn-primary" type="button" disabled>
+                                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                                uploading
+                                            </button> :
+                                            < button className="btn main-bg" disabled>Submit</button>
+                                    }
+
                                 </div>
                             </form>
                         </div>

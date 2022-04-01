@@ -1,61 +1,25 @@
-import React, { useState } from 'react';
-import swal from 'sweetalert';
-import toast from 'react-hot-toast';
-const MenuDetails = ({ service }) => {
-
-    const handleDelete = (event, id) => {
-        const loading = toast.loading('Please wait...!');
-        fetch(`https://morning-thicket-61908.herokuapp.com/delete/${id}`, {
-            method: 'DELETE'
-        })
-            .then(res => res.json())
-            .then(result => {
-                toast.dismiss(loading);
-                if (result) {
-                    event.target.parentNode.parentNode.style.display = 'none';
-                    return swal("Services deleted ", "Services deleted successfully", "success");
-
-                }
-                swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true });
-            })
-            .catch(error => {
-                toast.dismiss(loading);
-                swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true });
-
-
-            })
-
-    }
-
+import React from 'react';
+const MenuDetails = ({ foods, handleDelete, handleEdit }) => {
     return (
-        <div>
-            <table className="table table-borderless">
-                <thead>
-                    <tr>
-                        <th className="text-secondary text-left" scope="col">Sr No</th>
-                        <th className="text-secondary" scope="col">ServiceName</th>
-                        <th className="text-secondary" scope="col">description</th>
-                        <th className="text-secondary" scope="col">price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {service.map((service, index) =>
-                            <tr>
-                                <td>{index + 1}</td>
-                                <td>{service.name}</td>
-                                <td>{service.description}</td>
-                                <td>{service.price}</td>
-                                <td onClick={(e) => handleDelete(e, service._id)} >
-                                    <button class="btn btn-warning" type="button" >
-                                        delete
-                                    </button>
-                                </td>
-                            </tr>
-                        )
-                    }
-                </tbody>
-            </table>
-        </div>
+        <tbody>
+            {foods?.foods?.map((food, index) =>
+                <tr className="border shadow-sm p-2 my-3 rounded-2" key={index + 1}>
+                    <td>{index + 1}</td>
+                    <td> <img src={food.foodImg} style={{ height: "60px" }} alt="..."></img></td>
+                    <td>{food.foodName}</td>
+                    <td> ${food.foodPrice}</td>
+                    <td>  <button className="btn btn-warning" onClick={() => handleEdit(food._id)} type="button" >
+                        Edit
+                    </button></td>
+                    <td onClick={(e) => handleDelete(e, food._id)} >
+                        <button className="btn btn-danger" type="button" >
+                            delete
+                        </button>
+                    </td>
+                </tr>
+            )
+            }
+        </tbody>
     );
 };
 

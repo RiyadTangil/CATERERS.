@@ -1,0 +1,11 @@
+.avatar {
+overflow: hidden;
+    width: 60px;
+    height: 60px;
+    background-color: rgb(251, 248, 248);
+    border-radius: 50%;
+ }
+ .review-star{
+     font-size:10px!important;
+     color:white;
+ }

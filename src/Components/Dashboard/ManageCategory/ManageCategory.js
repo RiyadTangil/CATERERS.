@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useContext } from 'react';
 import swal from 'sweetalert';
+import { UserContext } from '../../../App';
 import toast from 'react-hot-toast';
 const ManageCategory = ({ reload }) => {
     const [categories, setCategories] = useState([])
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext)
     const handleDelete = (e, id) => {
 
         const loading = toast.loading('Please wait...!');
@@ -27,7 +29,7 @@ const ManageCategory = ({ reload }) => {
             })
     }
     useEffect(() => {
-        fetch("http://localhost:5000/category")
+        fetch(`http://localhost:5000/category/categoryByUser/${loggedInUser.user_id}`)
             .then(res => res.json())
             .then(data => setCategories(data))
     }, [reload])
@@ -45,12 +47,12 @@ const ManageCategory = ({ reload }) => {
                 <tbody>
                     {
                         categories?.map((category, index) =>
-                            <tr className="border shadow-sm p-2 my-3 rounded-2">
+                            <tr key={index+1} className="border shadow-sm p-2 my-3 rounded-2">
                                 <td>{index + 1}</td>
                                 <td>{category.categoryName}</td>
 
                                 <td onClick={(e) => handleDelete(e, category._id)} >
-                                    <button class="btn btn-warning" type="button" >
+                                    <button className="btn btn-warning" type="button" >
                                         delete
                                     </button>
                                 </td>

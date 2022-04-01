@@ -4,11 +4,11 @@ import { addToDatabaseCart } from '../../../utilities/databaseManager';
 import { UserCard } from '../../../App';
 const Foods = () => {
     const [cardItems, setCardItems] = useContext(UserCard);
-    const [allFood, setAllFood] = useState([])
+    const [restaurants, setAllRestaurant] = useState([])
     useEffect(() => {
-        fetch("http://localhost:5000/foods")
+        fetch("http://localhost:5000/restaurant")
             .then(res => res.json())
-            .then(data => setAllFood(data))
+            .then(data => setAllRestaurant(data))
     }, [])
     const addTOLocalStorage = (id) => {
         addToDatabaseCart(id)
@@ -25,7 +25,7 @@ const Foods = () => {
             newCart = [...others, sameProduct];
         }
         else {
-           food.quantity=1 
+            food.quantity = 1
 
             newCart = [...cardItems, food];
         }
@@ -40,7 +40,7 @@ const Foods = () => {
                 <h2>Services We Provide </h2>
             </div>
             <div className="d-flex justify-content-center pb-3  align-items-center">
-                {allFood.length < 1 ?
+                {restaurants.length < 1 ?
                     <div className="d-flex py-5 my-5 justify-content-center">
                         <div className="spinner-border text-success" role="status">
                             <span className="visually-hidden">Loading...</span>
@@ -48,7 +48,7 @@ const Foods = () => {
                     </div> :
                     <div className="w-75 row mt-5 g-2 ">
                         {
-                            allFood.map(food => <FoodDetails addTOLocalStorage={addTOLocalStorage} food={food} handleCard={handleCard} key={food.name}></FoodDetails>)
+                            restaurants?.map(restaurant => <FoodDetails  restaurant={restaurant} handleCard={handleCard} key={restaurant._id}></FoodDetails>)
                         }
                     </div>
                 }
