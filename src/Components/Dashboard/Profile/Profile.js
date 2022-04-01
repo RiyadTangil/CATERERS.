@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { UserContext } from '../../../App';
 import man from "../../../images/man.png"
 import SideVarNav from '../SidvarNav/SideVarNav';
-import './profile.css'
+
 
 const Profile = () => {
     const[loggedInUser, setLoggedInUser]= useContext(UserContext)
