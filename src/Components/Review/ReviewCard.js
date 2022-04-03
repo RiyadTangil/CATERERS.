@@ -18,7 +18,7 @@ const ReviewCard = (props) => {
                                 </div>
                             </div>
                             <div>
-                                <button type="button" class=" btn-sm btn primary-btn">Follow</button>
+                                <button type="button" className=" btn-sm btn primary-btn">Follow</button>
 
                             </div>
 

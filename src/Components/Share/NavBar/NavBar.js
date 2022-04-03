@@ -13,7 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-regular-svg-icons';
 import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
 import Card from './Card';
-const NavBar = () => {
+const NavBar = ({setSearchResult}) => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext)
     const [show, setShow] = useState(false);
     const [cardItems, setCardItems] = useContext(UserCard);
@@ -37,7 +37,7 @@ const NavBar = () => {
         <div>
             <Navbar fixed="top" style={{ backgroundColor: "rgb(0, 156, 134)" }} collapseOnSelect expand="lg" variant="dark">
                 <Navbar.Brand href="/">
-                    <img style={{ width: "40px", marginLeft: "20px" }} src={mylogo} alt="" />
+                    <img style={{ width: "40px",height:"50px", marginLeft: "20px" }} src={mylogo} alt="" />
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
@@ -45,6 +45,7 @@ const NavBar = () => {
                         <Form className="d-flex">
                             <FormControl
                                 type="search"
+                                onChange={(e) => setSearchResult(e.target.value)}
                                 placeholder="Search"
                                 className="me-2"
                                 aria-label="Search"
@@ -53,8 +54,8 @@ const NavBar = () => {
                         <Link className="px-2 mx-3 text-light text-decoration-none" to="/dashboard/profile">menu</Link>
                         {/* {loggedInUser.userType === "caterer" && <Link className="px-2 mx-3 text-light text-decoration-none" to="/dashboard/profile">menu</Link>} */}
                         <Card show={show} setShow={setShow} cardItems={cardItems} />
-                        <Link className="px-2 mx-3 text-light text-decoration-none" onClick={() => setShow(true)}>
-                            <FontAwesomeIcon icon={faCartArrowDown} /><span className="selected-card">{cardItems.length}</span></Link>
+                        <p className="px-2 pt-3 mx-3 text-light text-decoration-none" onClick={() => setShow(true)}>
+                            <FontAwesomeIcon icon={faCartArrowDown} /><span className="selected-card">{cardItems.length}</span></p>
                         <Nav className=" text-light text-decoration-none p-0 m-0" >
                             {
                                 loggedInUser.email ?

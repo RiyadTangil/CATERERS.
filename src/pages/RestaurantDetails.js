@@ -5,15 +5,16 @@ import RestaurantNavbar from '../Components/RestaurantNavbar/RestaurantNavbar';
 import NavBar from '../Components/Share/NavBar/NavBar';
 
 const RestaurantDetails = () => {
+    const [searchText, setSearchResult] = useState("");
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [])
 
     return (
         <div >
-            <NavBar />
+            <NavBar setSearchResult={setSearchResult}/>
             <RestaurantInfo></RestaurantInfo>
-            <RestaurantNavbar></RestaurantNavbar>
+            <RestaurantNavbar searchText={searchText}></RestaurantNavbar>
         </div>
     );
 };

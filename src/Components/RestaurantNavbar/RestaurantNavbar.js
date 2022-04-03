@@ -2,7 +2,7 @@ import React from 'react';
 import OnlineOrders from '../OnlineOrders/OnlineOrders';
 import Review from '../Review/Review';
 import './RestaurantNavbar.css'
-const RestaurantNavbar = () => {
+const RestaurantNavbar = ({searchText}) => {
     return (
         <div className="bg-white ">
             <div className="container ">
@@ -16,7 +16,7 @@ const RestaurantNavbar = () => {
                 </nav>
                 <div className="tab-content" id="nav-tabContent">
                     <div className="tab-pane fade show active " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                        <OnlineOrders></OnlineOrders>
+                        <OnlineOrders searchText={searchText}></OnlineOrders>
                     </div>
                     <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                         <Review></Review>
