@@ -7,7 +7,7 @@ const OrderList = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext)
     const [show, setShow] = useState(false)
     useEffect(() => {
-        fetch(`http://localhost:5000/orders/my-orders/${loggedInUser.user_id}`)
+        fetch(`http://localhost:5000/orders/caterer-orders/${loggedInUser.user_id}`)
             .then(res => res.json())
             .then(data => setOrderList(data))
 
@@ -64,9 +64,9 @@ const OrderList = () => {
                                     orderList?.map((order, index) =>
                                         <tr>
                                             <td>{index + 1}</td>
-                                            <td className="">{order?.user?.name}</td>
-                                            <td className=" ">{order?.user?.email}</td>
-                                            <td>{order?.user?.phoneNo}</td>
+                                            <td className="">{order?.customer?.name}</td>
+                                            <td className=" ">{order?.customer?.email}</td>
+                                            <td>{order?.customer?.phoneNo}</td>
                                             <td> ${order?.price}</td>
                                             <td>Credit cart</td>
                                             <td>

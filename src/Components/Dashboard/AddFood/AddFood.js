@@ -43,12 +43,13 @@ const AddFood = () => {
 
 
     }
+    console.log(imgLink)
     useEffect(() => {
         fetch(`http://localhost:5000/category/categoryByUser/${loggedInUser.user_id}`)
             .then(res => res.json())
             .then(data => setCategories(data))
     }, [])
-    console.log(info);
+   
     const onSubmit = (e) => {
         const loading = toast.loading('Please wait...!');
         e.preventDefault()

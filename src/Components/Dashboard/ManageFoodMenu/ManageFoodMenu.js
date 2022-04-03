@@ -7,7 +7,7 @@ import { UserContext } from '../../../App';
 import MenuDetails from './MenuDetails';
 const ManageFoodMenu = () => {
     const [foods, setFoods] = useState([])
-    const [editId, setEditId] = useState(null)
+    const [editableFood, setEditableFood] = useState(null)
     const [show, setShow] = useState(false);
     const [loggedInUser, setLoggedInUser] = useContext(UserContext)
 
@@ -38,9 +38,9 @@ const ManageFoodMenu = () => {
             })
 
     }
-    const handleEdit = (id) => {
+    const handleEdit = (food) => {
         setShow(true)
-        setEditId(id)
+        setEditableFood(food)
     }
 
 
@@ -63,7 +63,7 @@ const ManageFoodMenu = () => {
                         </thead>
 
                 {foods?.map((food, index) => <MenuDetails key={index + 1} foods={food} handleDelete={handleDelete} handleEdit={handleEdit} />)}
-                <EditModal show={show} editId={editId} setShow={setShow} />
+                <EditModal show={show} editableFood ={editableFood} setShow={setShow} />
 
                     </table>
                 </div>

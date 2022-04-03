@@ -8,7 +8,7 @@ const MenuDetails = ({ foods, handleDelete, handleEdit }) => {
                     <td> <img src={food.foodImg} style={{ height: "60px" }} alt="..."></img></td>
                     <td>{food.foodName}</td>
                     <td> ${food.foodPrice}</td>
-                    <td>  <button className="btn btn-warning" onClick={() => handleEdit(food._id)} type="button" >
+                    <td>  <button className="btn btn-warning" onClick={() => handleEdit(food)} type="button" >
                         Edit
                     </button></td>
                     <td onClick={(e) => handleDelete(e, food._id)} >

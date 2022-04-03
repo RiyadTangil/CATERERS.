@@ -1,9 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import FoodDetails from '../FoodDetails/FoodDetails';
-import { addToDatabaseCart } from '../../../utilities/databaseManager';
-import { UserCard } from '../../../App';
-const Foods = () => {
-    const [cardItems, setCardItems] = useContext(UserCard);
+import RestaurantDetails from '../RestaurantDetails/RestaurantDetails';
+const Restaurants = () => {
     const [restaurants, setAllRestaurant] = useState([])
     useEffect(() => {
         fetch("http://localhost:5000/restaurant")
@@ -27,7 +24,7 @@ const Foods = () => {
                     </div> :
                     <div className="w-75 row mt-5 g-2 ">
                         {
-                            restaurants?.map(restaurant => <FoodDetails  restaurant={restaurant}  key={restaurant._id}></FoodDetails>)
+                            restaurants?.map(restaurant => <RestaurantDetails  restaurant={restaurant}  key={restaurant._id}></RestaurantDetails>)
                         }
                     </div>
                 }
@@ -36,4 +33,4 @@ const Foods = () => {
     );
 };
 
-export default Foods;
+export default Restaurants;

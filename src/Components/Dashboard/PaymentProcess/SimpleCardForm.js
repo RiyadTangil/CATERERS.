@@ -29,9 +29,12 @@ const SimpleCardForm = ({ order }) => {
   const forDatabase = cardItems.map(item => {
     return {
         foodId: item._id,
+        catererId:item.userId,
         quantity: item.quantity
     }
 })
+
+
   const handleOrder = async data => {
     if (!stripe || !elements) {
       return;
@@ -50,9 +53,10 @@ const SimpleCardForm = ({ order }) => {
     }
 
     const orderInfo = {
-      "id": loggedInUser.user_id,
+      "customerId": loggedInUser.user_id,
       "price": total,
       "status": "Pending",
+      "catererId": cardItems[0].userId,
       "ordersItems": forDatabase,
       "paymentId": paymentMethod.id
     }

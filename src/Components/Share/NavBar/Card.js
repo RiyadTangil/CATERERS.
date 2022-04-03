@@ -1,4 +1,6 @@
 
+import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useState } from 'react';
 import { Offcanvas } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -10,6 +12,25 @@ const Card = ({ show, setShow }) => {
     const handleShow = () => setShow(true);
     const handleRemoveItem = (id) => {
         const newCardItems = cardItems.filter(item => item._id !== id)
+        setCardItems(newCardItems)
+    }
+    const handleAddItem = (id) => {
+        const newCardItems = cardItems.filter(item => {
+            if (item._id === id) {
+                item.quantity += 1
+            }
+            return item
+        })
+        setCardItems(newCardItems)
+    }
+    const handleMinusItem = (id) => {
+        const newCardItems = cardItems.filter(item => {
+            if (item._id === id && item.quantity > 1) {
+                item.quantity -= 1
+            }
+            return item
+        })
+        setCardItems(newCardItems)
         setCardItems(newCardItems)
     }
     const total = cardItems.reduce((total, prd) => total + (prd.foodPrice * prd.quantity), 0)
@@ -40,8 +61,14 @@ const Card = ({ show, setShow }) => {
 
                                     <div class="card-body d-flex justify-content-between align-content-center">
                                         <div>
-                                            <h5 class="card-title">{items.foodName}</h5>
-                                            <small>Total: <strong> {items.quantity}</strong>✖ $ <strong>{items.foodPrice}</strong>= {items.quantity * items.foodPrice}</small>
+                                            <div>
+                                                <h5 class="card-title">{items.foodName}</h5>
+                                                <small>Total: <strong> {items.quantity}</strong>✖ $ <strong>{items.foodPrice}</strong>= {items.quantity * items.foodPrice}</small>
+                                            </div>
+                                            <div className="d-flex justify-content-between">
+                                                <button type="button" onClick={() => handleMinusItem(items._id)} class="btn btn-warning btn-sm"><FontAwesomeIcon icon={faMinus} /></button>
+                                                <button type="button" onClick={() => handleAddItem(items._id)} class="btn btn-success btn-sm"><FontAwesomeIcon icon={faPlus} /></button>
+                                            </div>
                                         </div>
                                         <img onClick={() => handleRemoveItem(items._id)} style={{ height: "30px", cursor: "pointer" }} src={cross} class="img-fluid rounded-start" alt="..."></img>
 

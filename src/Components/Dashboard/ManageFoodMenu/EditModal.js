@@ -4,7 +4,7 @@ import { Button, Modal } from 'react-bootstrap';
 import swal from 'sweetalert';
 import toast from 'react-hot-toast';
 import axios from 'axios';
-const EditModal = ({ show, setShow, editId }) => {
+const EditModal = ({ show, setShow, editableFood }) => {
     const [info, setInfo] = useState({});
     const [imgLink, setFile] = useState(null);
     const [imgUploading, setImgUpload] = useState(false)
@@ -44,7 +44,7 @@ const EditModal = ({ show, setShow, editId }) => {
     const onSubmit = (e) => {
         const loading = toast.loading('Please wait...!');
         e.preventDefault()
-        fetch(`http://localhost:5000/foods/${editId}`, {
+        fetch(`http://localhost:5000/foods/${editableFood._id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/Json'
@@ -74,6 +74,7 @@ const EditModal = ({ show, setShow, editId }) => {
             })
         setShow(false);
     }
+
     return (
 
         <Modal show={show} onHide={handleClose}>
@@ -88,7 +89,7 @@ const EditModal = ({ show, setShow, editId }) => {
                                 <div className="row g-3 ">
                                     <div className="col">
                                         <label htmlFor="exampleInputEmail1">Food Name</label>
-                                        <input type="text" name="name" onBlur={handleBlur} className="form-control" placeholder="Food Name" ></input>
+                                        <input type="text" name="name" onBlur={handleBlur} defaultValue={editableFood?.foodName} className="form-control" placeholder="Food Name" ></input>
                                     </div>
                                     <div className="col">
                                         <label htmlFor="exampleInputEmail1">Food img</label>
@@ -98,11 +99,11 @@ const EditModal = ({ show, setShow, editId }) => {
                                 <div className="row mt-2 g-3">
                                     <div className="col form-group">
                                         <label htmlFor="exampleInputEmail1">Description</label>
-                                        <input type="text" name="description" onBlur={handleBlur} className="form-control" placeholder="Food Description" ></input>
+                                        <input type="text" name="description" onBlur={handleBlur} className="form-control" defaultValue={editableFood?.foodDescription} placeholder="Food Description" ></input>
                                     </div>
                                     <div className="col">
                                         <label htmlFor="exampleInputEmail1">Price</label>
-                                        <input type="number" onBlur={handleBlur} name="price" className="form-control" placeholder="Food Price"></input>
+                                        <input type="number" onBlur={handleBlur} name="price" defaultValue={editableFood?.foodPrice} className="form-control" placeholder="Food Price"></input>
                                     </div>
 
                                 </div>

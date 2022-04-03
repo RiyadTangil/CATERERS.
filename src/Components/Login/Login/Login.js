@@ -8,10 +8,12 @@ import firebaseConfig from "./firebase.config";
 import { useHistory, useLocation } from "react-router";
 import { UserContext } from "../../../App";
 import "./login.css"
+import axios from "axios";
 
 const Login = (props) => {
     const { setUser } = props;
-
+    const [imgLink, setFile] = useState(null);
+    const [imgUploading, setImgUpload] = useState(false)
     if (firebase.apps.length === 0) {
         firebase.initializeApp(firebaseConfig);
     }
@@ -48,6 +50,7 @@ const Login = (props) => {
                     "email": loginInfo.email,
                     "typeOfPerson": selectedUser,
                     "shopPhone": loginInfo.shopPhone,
+                    "shopImg": imgLink,
                     "shopName": loginInfo.shopName,
                     "password": loginInfo.password
                 })
@@ -55,7 +58,7 @@ const Login = (props) => {
                 .then(res => res.json())
                 .then(data => {
                     toast.dismiss(loading);
-                
+
                     storeAuthToken(data.token ? data?.token : null)
                     setLoggedInUser(data?.data ? data?.data : [])
                     history.replace(from);
@@ -119,7 +122,7 @@ const Login = (props) => {
     let history = useHistory();
     let location = useLocation();
     let { from } = location.state || { from: { pathname: "/" } };
-//this is the google sign in method . If require you can use
+    //this is the google sign in method . If require you can use
     // const handleGoogleSignIn = () => {
     //     const provider = new firebase.auth.GoogleAuthProvider();
     //     firebase
@@ -143,6 +146,26 @@ const Login = (props) => {
 
 
     // };
+    const handleFileChange = (e) => {
+        const newFile = e.target.files[0];
+        const imageData = new FormData();
+        imageData.set('key', '8ece3963cdc5195811f654de65d90034');
+        imageData.append('image', newFile);
+        //axios copied code form git hub search results of google
+        setImgUpload(true)
+        axios.post('https://api.imgbb.com/1/upload',
+            imageData)
+            .then(function (response) {
+                setFile(response.data.data.display_url);
+                setImgUpload(false)
+            })
+            .catch(function (error) {
+                console.log(error);
+                setImgUpload(false)
+            });
+
+
+    }
     return (
 
         <div className="login-page container ">
@@ -225,6 +248,16 @@ const Login = (props) => {
                                     </label>
                                     <input className="form-control" required onBlur={handleBlur} name="shopPhone" type="text" placeholder=" Caterer shop Phone" />
                                 </div>
+                                <div className=" mb-1">
+                                    <label htmlFor="inputemail3" className="col-sm-6 col-form-label">
+                                        Upload shop img                                    </label>
+                                    <input type="file" name="img" onChange={handleFileChange} className="form-control" placeholder="Food img"></input>
+                                </div>
+                                {imgUploading &&
+                                <div class="d-flex align-items-center">
+                                    <strong>Uploading...</strong>
+                                    <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+                                </div>}
                             </>}
                     </form>
                     <p className="text-warning">{loggedInUser?.error}</p>
