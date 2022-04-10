@@ -6,7 +6,7 @@ import "./headerStyle.css"
 const Header = () => {
     return (
         <div className="header-container">
-            <NavBar ></NavBar>
+            {/* <NavBar ></NavBar> */}
             <div className=" hero-container ">
 
             </div>

@@ -12,7 +12,7 @@ const ManageFoodMenu = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext)
 
     useEffect(() => {
-        fetch(`http://localhost:5000/category/foodByCategory/${loggedInUser.user_id}`)
+        fetch(`http://localhost:5000/category/myFoods/${loggedInUser.user_id}`)
             .then(res => res.json())
             .then(data => setFoods(data))
     }, [show])

@@ -62,8 +62,9 @@ const Login = (props) => {
                     storeAuthToken(data.token ? data?.token : null)
                     setLoggedInUser(data?.data ? data?.data : [])
                     history.replace(from);
+                    console.log(data?.data?.typeOfPerson)
                     if (data?.token) {
-                        return swal("User Added", "User has been added successful.", "success");
+                        return swal(`${data?.data?.typeOfPerson} added`, `${data?.data?.typeOfPerson} has been added successful.`, "success");
                     }
                     swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true });
 

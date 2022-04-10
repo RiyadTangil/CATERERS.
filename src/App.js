@@ -6,7 +6,7 @@ import {
   Route,
 } from "react-router-dom";
 import Login from './Components/Login/Login/Login';
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import PrivetRoute from './Components/Login/PrivetRoute/PrivetRoute';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Toaster } from 'react-hot-toast';
@@ -22,17 +22,43 @@ import Test from "./Components/Test";
 import Restaurant from "./Components/Dashboard/Restaurant/Restaurant";
 import RestaurantDetails from "./pages/RestaurantDetails";
 import Profile from "./Components/Dashboard/Profile/Profile";
-
+import SupportAdmin from "./pages/SupportAdmin";
+import jwt_decode from "jwt-decode";
 export const UserContext = createContext()
 export const UserOrder = createContext()
+export const ChatContext = createContext()
 export const UserCard = createContext()
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({})
-  const [order, setOrder] = useState({})
+  const [chatId, setChatId] = useState({})
   const [cardItems, setCardItems] = useState([])
+  useEffect(() => {
+    const token = sessionStorage.getItem('token');
+    if (!token) {
+      return false;
+    }
+
+    const decodedToken = jwt_decode(token);
+    const { name, email, picture, userType, user_id, address, privetId, projectId,shopName,shopPhone,phoneNo } = decodedToken;
+    console.log(decodedToken, "deconde from app")
+    const newSignedInUser = {
+      name: name,
+      email: email,
+      phoneNo: phoneNo,
+      shopName: shopName,
+      shopPhone: shopPhone,
+      img: picture,
+      userType: userType,
+      user_id: user_id,
+      privetId: privetId,
+      projectId: projectId,
+      address: address
+    };
+    setLoggedInUser(newSignedInUser)
+  }, [])
   return (
     <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
-      <UserOrder.Provider value={[order, setOrder]}>
+      <ChatContext.Provider value={[chatId, setChatId]}>
         <UserCard.Provider value={[cardItems, setCardItems]}>
           <Toaster />
           <Router>
@@ -68,15 +94,18 @@ function App() {
                 <Book></Book>
               </PrivetRoute>
               <PrivetRoute path="/dashboard/profile">
-                <Profile/>
+                <Profile />
               </PrivetRoute>
               <Route path="/dashboard/bookList">
                 <BookList />
               </Route>
+              <PrivetRoute path="/support">
+                <SupportAdmin />
+              </PrivetRoute>
             </Switch>
           </Router>
         </UserCard.Provider>
-      </UserOrder.Provider>
+      </ChatContext.Provider>
     </UserContext.Provider>
   );
 }

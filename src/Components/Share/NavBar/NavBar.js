@@ -7,13 +7,12 @@ import Popup from 'reactjs-popup';
 import { UserCard, UserContext } from '../../../App';
 import loginImg from '../../../images/man.png'
 import mylogo from '../../../images/myLogo.jpg'
-import jwt_decode from "jwt-decode";
 import "./NavBar.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-regular-svg-icons';
 import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
 import Card from './Card';
-const NavBar = ({setSearchResult}) => {
+const NavBar = ({ setSearchResult }) => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext)
     const [show, setShow] = useState(false);
     const [cardItems, setCardItems] = useContext(UserCard);
@@ -21,23 +20,14 @@ const NavBar = ({setSearchResult}) => {
         sessionStorage.removeItem('token');
         setLoggedInUser({})
     }
-    useEffect(() => {
-        const token = sessionStorage.getItem('token');
-        if (!token) {
-            return false;
-        }
-        const decodedToken = jwt_decode(token);
-        const { name, email, picture, userType, user_id ,address} = decodedToken;
-        const newSignedInUser = { name: name, email: email, img: picture, userType: userType, user_id: user_id ,address:address};
-        setLoggedInUser(newSignedInUser)
-    }, [])
+
 
 
     return (
         <div>
             <Navbar fixed="top" style={{ backgroundColor: "rgb(0, 156, 134)" }} collapseOnSelect expand="lg" variant="dark">
                 <Navbar.Brand href="/">
-                    <img style={{ width: "40px",height:"50px", marginLeft: "20px" }} src={mylogo} alt="" />
+                    <img style={{ width: "40px", height: "50px", marginLeft: "20px" }} src={mylogo} alt="" />
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">

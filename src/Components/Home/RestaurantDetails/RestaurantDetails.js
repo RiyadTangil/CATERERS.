@@ -5,7 +5,7 @@ import food from '../../../images/food-img.jpg'
 import { useHistory } from 'react-router-dom';
 const RestaurantDetails = ({ restaurant, handleCard }) => {
     let history = useHistory();
-    console.log(restaurant)
+
     return (
         <div className="col-md-4 col-sm-6">
             <div onClick={() => history.push(`/restaurant/${restaurant.user._id}`)} className="card rest-card" >

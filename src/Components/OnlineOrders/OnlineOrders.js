@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 // import FoodCard from '../FoodCard/FoodCard';
 import './OnlineOrders.css'
 import Scrollspy from 'react-scrollspy'
 import OrdersBox from './OrdersBox';
 import { useParams } from 'react-router-dom';
+
+import { ChatContext } from '../../App';
+import SupportEngine from '../SupportEngine';
 const RestaurantVerticalNav = ({ searchText }) => {
-    console.log(searchText);
+    const [chatId, setChatId] = useContext(ChatContext);
     const [foodInfos, setFoodInfo] = useState([])
     const [searchFood, setSearchFood] = useState([])
     const [categories, setCategories] = useState([])
@@ -16,13 +19,20 @@ const RestaurantVerticalNav = ({ searchText }) => {
     //     dispatch(getRestaurantList());
     // }, [dispatch]);
 
+
     useEffect(() => {
         fetch(`http://localhost:5000/category/foodByCategory/${id}`)
             .then(res => res.json())
             .then(data => {
-                setFoodInfo(data)
-                const category = data?.map(food => food.categoryName)
+                setFoodInfo(data?.data)
+                console.log(data?.user);
+                const category = data?.data?.map(food => food.categoryName)
                 setCategories(category)
+                const newChatId = {
+                    privetId: data?.user?.privetId,
+                    projectId: data?.user?.projectId
+                };
+                setChatId(newChatId)
 
             })
 
@@ -51,10 +61,14 @@ const RestaurantVerticalNav = ({ searchText }) => {
 
                     </Scrollspy>
                 </div>
-
+                {
+                    chatId.privetId &&
+                    <SupportEngine />
+                }
+                {/* <SupportEngine/> */}
                 <div className="col-md-9 col-sm-12 ps-3">
                     {searchFood.length > 0 ?
-                        <OrdersBox  searchFood={searchFood}/>   :                     foodInfos.map((foodInfo, index) =>
+                        <OrdersBox searchFood={searchFood} /> : foodInfos.map((foodInfo, index) =>
                             <OrdersBox
                                 key={index + 1}
                                 navLink={index + 1}

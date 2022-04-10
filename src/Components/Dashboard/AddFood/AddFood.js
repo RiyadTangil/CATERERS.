@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { UserContext } from '../../../App';
 import SideVarNav from '../SidvarNav/SideVarNav';
 import axios from 'axios';
+import DashboardContainer from '../DashboardContainer';
 const containerStyle = {
     backgroundColor: "#F4FDFB",
     // marginRight: "20px"
@@ -49,7 +50,7 @@ const AddFood = () => {
             .then(res => res.json())
             .then(data => setCategories(data))
     }, [])
-   
+
     const onSubmit = (e) => {
         const loading = toast.loading('Please wait...!');
         e.preventDefault()
@@ -86,71 +87,109 @@ const AddFood = () => {
             })
     }
     return (
-        <div className="row">
-            <SideVarNav></SideVarNav>
-            <div className="col-md-9 mt-3">
-                <div style={containerStyle} className="shadow">
-                    <div className=" p-3   d-flex justify-content-center flex-column">
-                        <div className="row  mt-2 p-3 g-3">
-                            <form onSubmit={onSubmit} >
-                                <div className="row g-3 ">
-                                    <div className="col">
-                                        <label htmlFor="exampleInputEmail1">Food Name </label>
-                                        <input type="text" name="name" onBlur={handleBlur} className="form-control" placeholder="Food Name" ></input>
-                                    </div>
-                                    <div className="col">
-                                        <label htmlFor="exampleInputEmail1">Food img</label>
-                                        <input type="file" name="img" onChange={handleFileChange} className="form-control" placeholder="Food img"></input>
-                                    </div>
-                                </div>
-                                <div className="row mt-2 g-3">
-                                    <div className="col form-group">
-                                        <label htmlFor="exampleInputEmail1">Description</label>
-                                        <input type="text" name="description" onBlur={handleBlur} className="form-control" placeholder="Food Description" ></input>
-                                    </div>
-                                    <div className="col">
-                                        <label htmlFor="exampleInputEmail1">Price</label>
-                                        <input type="number" onBlur={handleBlur} name="price" className="form-control" placeholder="Food Price"></input>
-                                    </div>
 
-                                </div>
 
-                                <div className="row mt-2 g-3">
-                                    <div className="col-md-6 col-12">
-                                        <select onBlur={handleBlur} className="form-select form-select mb-3" name="category" aria-label=".form-select-lg example">
-                                            {categories?.map((category, index) => <option key={index} value={category._id}>{category.categoryName}</option>)}
-                                        </select>
-                                    </div>
-                                    <div className="col-md-3 col-6">
-                                        <select onBlur={handleBlur} className="form-select form-select mb-3" name="publishStatus" aria-label=".form-select-lg example">
-                                            {published?.map((category, index) => <option key={index} value={category}>{category}</option>)}
-                                        </select>
-                                    </div>
-                                    <div className="col-md-3 col-6">
-                                        <select onBlur={handleBlur} className="form-select form-select mb-3" name="produceAvailable" aria-label=".form-select-lg example">
-                                            {avaiable?.map((category, index) => <option key={index} value={category}>{category}</option>)}
-                                        </select>
-                                    </div>
-                                </div>
-                                <div className="col-12 d-flex justify-content-end mt-2">
-                                    {imgLink ?
-
-                                        < button type="submit" className="btn main-bg">Submit</button> :
-                                        imgLink === null & imgUploading ?
-                                            <button class="btn btn-primary" type="button" disabled>
-                                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                                uploading
-                                            </button> :
-                                            < button className="btn main-bg" disabled>Submit</button>
-                                    }
-
-                                </div>
-                            </form>
+        <DashboardContainer pageTitle={"Menu"}>
+            {
+                <div className="accordion" id="accordionExample">
+                    <div className="accordion-item">
+                        <h2 className="accordion-header" id="headingOne">
+                            <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Accordion Item #1
+                            </button>
+                        </h2>
+                        <div id="collapseOne" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div className="accordion-body">
+                                <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                            </div>
+                        </div>
+                    </div>
+                    <div className="accordion-item">
+                        <h2 className="accordion-header" id="headingTwo">
+                            <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Accordion Item #2
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" className="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                            <div className="accordion-body">
+                                <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                            </div>
+                        </div>
+                    </div>
+                    <div className="accordion-item">
+                        <h2 className="accordion-header" id="headingThree">
+                            <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Accordion Item #3
+                            </button>
+                        </h2>
+                        <div id="collapseThree" className="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                            <div className="accordion-body">
+                                <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+                // <div className=" p-3   d-flex justify-content-center flex-column">
+                //     <div className="row  mt-2 p-3 g-3">
+                //         <form onSubmit={onSubmit} >
+                //             <div className="row g-3 ">
+                //                 <div className="col">
+                //                     <label htmlFor="exampleInputEmail1">Food Name </label>
+                //                     <input type="text" name="name" onBlur={handleBlur} className="form-control" placeholder="Food Name" ></input>
+                //                 </div>
+                //                 <div className="col">
+                //                     <label htmlFor="exampleInputEmail1">Food img</label>
+                //                     <input type="file" name="img" onChange={handleFileChange} className="form-control" placeholder="Food img"></input>
+                //                 </div>
+                //             </div>
+                //             <div className="row mt-2 g-3">
+                //                 <div className="col form-group">
+                //                     <label htmlFor="exampleInputEmail1">Description</label>
+                //                     <input type="text" name="description" onBlur={handleBlur} className="form-control" placeholder="Food Description" ></input>
+                //                 </div>
+                //                 <div className="col">
+                //                     <label htmlFor="exampleInputEmail1">Price</label>
+                //                     <input type="number" onBlur={handleBlur} name="price" className="form-control" placeholder="Food Price"></input>
+                //                 </div>
+
+                //             </div>
+
+                //             <div className="row mt-2 g-3">
+                //                 <div className="col-md-6 col-12">
+                //                     <select onBlur={handleBlur} className="form-select form-select mb-3" name="category" aria-label=".form-select-lg example">
+                //                         {categories?.map((category, index) => <option key={index} value={category._id}>{category.categoryName}</option>)}
+                //                     </select>
+                //                 </div>
+                //                 <div className="col-md-3 col-6">
+                //                     <select onBlur={handleBlur} className="form-select form-select mb-3" name="publishStatus" aria-label=".form-select-lg example">
+                //                         {published?.map((category, index) => <option key={index} value={category}>{category}</option>)}
+                //                     </select>
+                //                 </div>
+                //                 <div className="col-md-3 col-6">
+                //                     <select onBlur={handleBlur} className="form-select form-select mb-3" name="produceAvailable" aria-label=".form-select-lg example">
+                //                         {avaiable?.map((category, index) => <option key={index} value={category}>{category}</option>)}
+                //                     </select>
+                //                 </div>
+                //             </div>
+                //             <div className="col-12 d-flex justify-content-end mt-2">
+                //                 {imgLink ?
+
+                //                     < button type="submit" className="btn main-bg">Submit</button> :
+                //                     imgLink === null & imgUploading ?
+                //                         <button className="btn btn-primary" type="button" disabled>
+                //                             <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                //                             uploading
+                //                         </button> :
+                //                         < button className="btn main-bg" disabled>Submit</button>
+                //                 }
+
+                //             </div>
+                //         </form>
+                //     </div>
+                // </div>
+
+            }
+        </DashboardContainer>
     );
 };
 

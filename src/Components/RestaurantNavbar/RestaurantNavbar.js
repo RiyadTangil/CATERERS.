@@ -3,6 +3,7 @@ import OnlineOrders from '../OnlineOrders/OnlineOrders';
 import Review from '../Review/Review';
 import './RestaurantNavbar.css'
 const RestaurantNavbar = ({searchText}) => {
+
     return (
         <div className="bg-white ">
             <div className="container ">

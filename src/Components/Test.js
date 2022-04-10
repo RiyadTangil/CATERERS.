@@ -1,97 +1,154 @@
 import axios from 'axios';
-import React, { useState } from 'react';
-import { Button, Col, Form, ProgressBar } from 'react-bootstrap';
-import { useForm } from "react-hook-form";
+import React, { useState, useEffect, useRef } from 'react';
 
 const Test = () => {
-    const { register, handleSubmit, watch, errors } = useForm();
-    const [imageURL, setIMageURL] = useState(null);
 
-    const onSubmit = data => {
-        const eventData = {
-            name: data.name,
-            Price: Number(data.price),
-            weight: Number(data.weight),
-            imageURL: imageURL
-        };
-        console.log({ eventData });
-        const url = `https://gentle-tor-61540.herokuapp.com/addProduct`;
-
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(eventData)
-        })
-            .then(res => console.log('server side response', res))
-    };
+    const apiKey = process.env.REACT_APP_CE_GOOGLE_KEY;
+    console.log(apiKey);
+    const mapApiJs = 'https://maps.googleapis.com/maps/api/js';
+    const geocodeJson = 'https://maps.googleapis.com/maps/api/geocode/json';
 
 
+    // load google map api js
 
-
-    const handleImageUpload = event => {
-        console.log("event", event.target.files[0])
-        const imageData = new FormData();
-
-        imageData.set('key', '8ece3963cdc5195811f654de65d90034');
-        imageData.append('image', event.target.files[0]);
-        //axios copied code form git hub search results of google
-        axios.post('https://api.imgbb.com/1/upload',
-            imageData)
-            .then(function (response) {
-                setIMageURL(response.data.data.display_url);
-                console.log("response link", response.data.data.display_url);
+    function loadAsyncScript(src) {
+        return new Promise(resolve => {
+            const script = document.createElement("script");
+            Object.assign(script, {
+                type: "text/javascript",
+                async: true,
+                src
             })
-            .catch(function (error) {
-                console.log(error);
-            });
+            script.addEventListener("load", () => resolve(script));
+            document.head.appendChild(script);
+        })
+    }
 
+    const extractAddress = (place) => {
+
+        const address = {
+            city: "",
+            state: "",
+            zip: "",
+            country: "",
+            plain() {
+                const city = this.city ? this.city + ", " : "";
+                const zip = this.zip ? this.zip + ", " : "";
+                const state = this.state ? this.state + ", " : "";
+                return city + zip + state + this.country;
+            }
+        }
+
+        if (!Array.isArray(place?.address_components)) {
+            return address;
+        }
+
+        place.address_components.forEach(component => {
+            const types = component.types;
+            const value = component.long_name;
+
+            if (types.includes("locality")) {
+                address.city = value;
+            }
+
+            if (types.includes("administrative_area_level_2")) {
+                address.state = value;
+            }
+
+            if (types.includes("postal_code")) {
+                address.zip = value;
+            }
+
+            if (types.includes("country")) {
+                address.country = value;
+            }
+
+        });
+
+        return address;
+    }
+
+    const searchInput = useRef(null);
+    const [address, setAddress] = useState({});
+
+
+    // init gmap script
+    const initMapScript = () => {
+        // if script already loaded
+        if (window.google) {
+            return Promise.resolve();
+        }
+        const src = `${mapApiJs}?key=${apiKey}&libraries=places&v=weekly`;
+        return loadAsyncScript(src);
+    }
+
+    // do something on address change
+    const onChangeAddress = (autocomplete) => {
+        const place = autocomplete.getPlace();
+        setAddress(extractAddress(place));
+    }
+
+    // init autocomplete
+    const initAutocomplete = () => {
+        if (!searchInput.current) return;
+
+        const autocomplete = new window.google.maps.places.Autocomplete(searchInput.current);
+        autocomplete.setFields(["address_component", "geometry"]);
+        autocomplete.addListener("place_changed", () => onChangeAddress(autocomplete));
+
+    }
+
+
+    const reverseGeocode = ({ latitude: lat, longitude: lng }) => {
+        const url = `${geocodeJson}?key=${apiKey}&latlng=${lat},${lng}`;
+        searchInput.current.value = "Getting your location...";
+        fetch(url)
+            .then(response => response.json())
+            .then(location => {
+                const place = location.results[0];
+                const _address = extractAddress(place);
+                setAddress(_address);
+                searchInput.current.value = _address.plain();
+            })
+    }
+
+
+    const findMyLocation = () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                reverseGeocode(position.coords)
+            })
+        }
     }
 
 
 
 
 
+    // load map script after mounted
+    useEffect(() => {
+        initMapScript().then(() => initAutocomplete())
+    }, []);
+
+
 
     return (
-        <div style={{ padding: "10px", margin: "20px" }}>
-<h2>hrllo</h2>
+        <div >
+            <div>
+                <div className="search">
+                    <span>search</span>
+                    <input ref={searchInput} type="text" placeholder="Search location...." />
+                    <button onClick={findMyLocation}>gps logo</button>
+                </div>
 
-            <Form onSubmit={handleSubmit(onSubmit)}>
-                {/* <Form.Row>
-                    <Form.Group as={Col} controlId="formGridEmail">
-                        <Form.Label>Product Name</Form.Label>
-                        <Form.Control type="text" name="name" placeholder="product name " ref={register} />
-                    </Form.Group>
+                <div className="address">
+                    <p>City: <span>{address.city}</span></p>
+                    <p>State: <span>{address.state}</span></p>
+                    <p>Zip: <span>{address.zip}</span></p>
+                    <p>Country: <span>{address.country}</span></p>
+                </div>
 
-                    <Form.Group as={Col} controlId="formGridPassword">
-                        <Form.Label>Weight</Form.Label>
-                        <Form.Control type="number" name="weight" ref={register} />
-                    </Form.Group>
-                </Form.Row>
-                <Form.Row>
-                    <Form.Group as={Col} controlId="formGridEmail">
-                        <Form.Label>Price</Form.Label>
-                        <Form.Control type="number" name="price" defaultValue="New exciting Event" ref={register} />
-                    </Form.Group>
-
-                    <Form.Group as={Col} controlId="formGridPassword">
-                        <Form>
-                            <Form.Group>
-                                <Form.File onChange={handleImageUpload} id="exampleFormControlFile1" label="Example file input" />
-                            </Form.Group>
-                        </Form>
-                    </Form.Group>
-                </Form.Row> */}
-
-
-                {/* <Form.Row style={{ justifyContent: "flex-end" }}>
-                    <Button variant="primary" type="submit">
-                        Submit
-                    </Button>
-                </Form.Row> */}
-            </Form>
+            </div>
         </div>
     );
 };

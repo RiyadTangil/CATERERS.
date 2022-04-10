@@ -7,6 +7,7 @@ import { faCog, faSignOutAlt, faPlusCircle, faHome, faBars, faTasks, faUserCircl
 import jwt_decode from "jwt-decode";
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../../App';
+import { faFacebookMessenger } from '@fortawesome/free-brands-svg-icons';
 
 const SideVarNav = () => {
 
@@ -18,36 +19,29 @@ const SideVarNav = () => {
 
 
   useEffect(() => {
-    const token = sessionStorage.getItem('token');
-    if (!token) {
-      return false;
-    }
-    const decodedToken = jwt_decode(token);
-    const { name, email, picture, userType, user_id, address } = decodedToken;
-    const newSignedInUser = { name: name, email: email, img: picture, userType: userType, user_id: user_id, address: address }
-    setLoggedInUser(newSignedInUser)
-    if (userType === "caterer") {
+
+    if (loggedInUser.userType === "caterer") {
       setCaterers(true)
     }
-    else if (userType === "admin") {
+    else if (loggedInUser.userType === "admin") {
       setAdmin(true)
       setCaterers(true)
     }
 
-    else if (userType === "customer") {
+    else if (loggedInUser.userType === "customer") {
 
       seCustomer(true)
     }
 
 
-  }, [])
+  }, [loggedInUser])
 
 
 
 
   return (
 
-    <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+    <Tab.Container  id="left-tabs-example" defaultActiveKey="first">
       <Col >
         <Nav variant="pills" className="flex-column nav-container ">
           <Nav.Item>
@@ -70,12 +64,15 @@ const SideVarNav = () => {
             <Nav.Item>
               <Link to="/dashboard/manage-food-menu"><FontAwesomeIcon icon={faTasks} /> Manage Food Menu</Link>
             </Nav.Item>
-          
-         
+
+
             <Nav.Item>
               <Link to="/dashboard/OrderList"><FontAwesomeIcon icon={faBars} /> Order List</Link>
             </Nav.Item>
-            </>
+            <Nav.Item>
+              <Link to="/support"><FontAwesomeIcon icon={faFacebookMessenger} /> Support</Link>
+            </Nav.Item>
+          </>
           }
 
           <Nav.Item>

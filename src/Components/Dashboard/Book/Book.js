@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { UserContext, UserOrder } from '../../../App';
+import { UserContext } from '../../../App';
 import { useForm } from "react-hook-form";
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import SimpleCardForm from '../PaymentProcess/SimpleCardForm';
 
 const Book = () => {
-    const [order, setOrder] = useContext(UserOrder)
+    const [order, setOrder] = useState([])
     const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
     const [show, setShow] = useState(true);
     const [paymentId, setPaymentId] = useState(null)
