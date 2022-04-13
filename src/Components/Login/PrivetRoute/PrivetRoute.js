@@ -12,9 +12,22 @@ const PrivetRoute = ({ children, ...rest }) => {
             return false;
         }
         const decodedToken = jwt_decode(token);
-        const { name, email, picture } = decodedToken;
-        const signedInUser = { name: name, email: email, img: picture }
-        setLoggedInUser(signedInUser)
+        const { name, email, picture, typeOfPerson, user_id, address, privetId, projectId,shopName,shopImg,shopPhone,phoneNo } = decodedToken;
+        const newSignedInUser = {
+            name: name,
+            email: email,
+            phoneNo: phoneNo,
+            shopName: shopName,
+            shopPhone: shopPhone,
+            img: picture,
+            shopImg: shopImg,
+            typeOfPerson: typeOfPerson,
+            user_id: user_id,
+            privetId: privetId,
+            projectId: projectId,
+            address: address
+          };
+          setLoggedInUser(newSignedInUser)
      
         // get current time
         const currentTime = new Date().getTime() / 1000;

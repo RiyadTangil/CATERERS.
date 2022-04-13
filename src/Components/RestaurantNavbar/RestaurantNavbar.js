@@ -5,18 +5,18 @@ import './RestaurantNavbar.css'
 const RestaurantNavbar = ({searchText}) => {
 
     return (
-        <div className="bg-white ">
-            <div className="container ">
+        <div className="restaurant-bg ">
+          
 
-                <nav className="sticky-food-menu">
+                {/* <nav className="sticky-food-menu">
                     <div className="nav nav-tabs bg-white" id="nav-tab" role="tablist">
                         <button className="nav-link active primary-text" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Order online</button>
                         <button className="nav-link primary-text" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Review</button>
 
                     </div>
-                </nav>
-                <div className="tab-content" id="nav-tabContent">
-                    <div className="tab-pane fade show active " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                </nav> */}
+                <div className="tab-content " id="nav-tabContent">
+                    <div className="tab-pane  fade show active " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                         <OnlineOrders searchText={searchText}></OnlineOrders>
                     </div>
                     <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
@@ -25,7 +25,7 @@ const RestaurantNavbar = ({searchText}) => {
 
                 </div>
             </div>
-        </div>
+        
     );
 };
 

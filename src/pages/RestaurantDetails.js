@@ -9,11 +9,10 @@ const RestaurantDetails = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [])
-
     return (
         <div >
             <NavBar setSearchResult={setSearchResult}/>
-            <RestaurantInfo></RestaurantInfo>
+            <RestaurantInfo setSearchResult={setSearchResult}></RestaurantInfo>
             <RestaurantNavbar searchText={searchText}></RestaurantNavbar>
         </div>
     );

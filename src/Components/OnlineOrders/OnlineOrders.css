@@ -21,3 +21,6 @@
   border-right: 2px solid red;
   background-color: #fbe5c4;
 }
+.support{
+  z-index: 1022;
+}

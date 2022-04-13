@@ -24,6 +24,7 @@ import RestaurantDetails from "./pages/RestaurantDetails";
 import Profile from "./Components/Dashboard/Profile/Profile";
 import SupportAdmin from "./pages/SupportAdmin";
 import jwt_decode from "jwt-decode";
+import ManageCategory from "./Components/Dashboard/ManageCategory/ManageCategory";
 export const UserContext = createContext()
 export const UserOrder = createContext()
 export const ChatContext = createContext()
@@ -39,8 +40,8 @@ function App() {
     }
 
     const decodedToken = jwt_decode(token);
-    const { name, email, picture, userType, user_id, address, privetId, projectId,shopName,shopPhone,phoneNo } = decodedToken;
-    console.log(decodedToken, "deconde from app")
+    const { name, email,shopImg, picture, typeOfPerson, user_id, address, privetId, projectId,shopName,shopPhone,phoneNo } = decodedToken;
+
     const newSignedInUser = {
       name: name,
       email: email,
@@ -48,7 +49,8 @@ function App() {
       shopName: shopName,
       shopPhone: shopPhone,
       img: picture,
-      userType: userType,
+      shopImg: shopImg,
+      typeOfPerson: typeOfPerson,
       user_id: user_id,
       privetId: privetId,
       projectId: projectId,
@@ -78,8 +80,8 @@ function App() {
               <Route path="/dashboard/add-food">
                 <AddFood />
               </Route>
-              <Route path="/dashboard/add-category">
-                <AddCategory />
+              <Route path="/dashboard/manage-category">
+                <ManageCategory />
               </Route>
               <Route path="/test">
                 <Test />

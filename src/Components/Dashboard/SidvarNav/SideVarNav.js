@@ -20,15 +20,16 @@ const SideVarNav = () => {
 
   useEffect(() => {
 
-    if (loggedInUser.userType === "caterer") {
+
+    if (loggedInUser.typeOfPerson === "caterer") {
       setCaterers(true)
     }
-    else if (loggedInUser.userType === "admin") {
+    else if (loggedInUser.typeOfPerson === "admin") {
       setAdmin(true)
       setCaterers(true)
     }
 
-    else if (loggedInUser.userType === "customer") {
+    else if (loggedInUser.typeOfPerson === "customer") {
 
       seCustomer(true)
     }
@@ -41,7 +42,7 @@ const SideVarNav = () => {
 
   return (
 
-    <Tab.Container  id="left-tabs-example" defaultActiveKey="first">
+    <Tab.Container id="left-tabs-example" defaultActiveKey="first">
       <Col >
         <Nav variant="pills" className="flex-column nav-container ">
           <Nav.Item>
@@ -54,12 +55,12 @@ const SideVarNav = () => {
           <Nav.Item>
             <Link to="/dashboard/BookList"><FontAwesomeIcon icon={faShoppingCart} /> My Orders</Link>
           </Nav.Item>
-          {isCaterers && <>
+          {loggedInUser.typeOfPerson === "caterer" && <>
             <Nav.Item>
               <Link to="/dashboard/add-food"><FontAwesomeIcon icon={faPlusCircle} /> Add Menu</Link>
             </Nav.Item>
             <Nav.Item>
-              <Link to="/dashboard/add-category"><FontAwesomeIcon icon={faPlusCircle} /> Add  Category</Link>
+              <Link to="/dashboard/manage-category"><FontAwesomeIcon icon={faPlusCircle} /> Manage  Category</Link>
             </Nav.Item>
             <Nav.Item>
               <Link to="/dashboard/manage-food-menu"><FontAwesomeIcon icon={faTasks} /> Manage Food Menu</Link>
@@ -76,7 +77,7 @@ const SideVarNav = () => {
           }
 
           <Nav.Item>
-            <Link to="/"><FontAwesomeIcon icon={faHome} /> Home page</Link>
+            <Link to="/"><FontAwesomeIcon icon={faHome} /> Home page </Link>
           </Nav.Item>
         </Nav>
       </Col>

@@ -17,7 +17,7 @@ export const styles = {
         // Position
         position: 'absolute', 
         left: 'calc(-100% - 44px - 28px)', 
-        top: 'calc(50% - 24px)', 
+        top: 'calc(70% - 24px)', 
         // Layering
         zIndex: '10000',
         boxShadow: '0px 0px 16px 6px rgba(0, 0, 0, 0.33)',

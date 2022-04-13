@@ -41,16 +41,20 @@ const RestaurantVerticalNav = ({ searchText }) => {
         setTab(activeTab)
     }
     useEffect(() => {
-        const matchedFood = foodInfos.filter(foodList => {
-            const filteredFood = foodList?.foods?.filter(foodItem => foodItem?.foodName.toLowerCase().includes(searchText.toLowerCase()))
-            setSearchFood(filteredFood)
+        const newArray = []
+        foodInfos?.map(foodList => {
+            foodList?.foods?.filter(foodItem => {
+                if (foodItem?.foodName.toLowerCase().includes(searchText)) {
+                    newArray.push(foodItem)
+                }
+            })
         })
-
+        setSearchFood(newArray)
     }, [searchText])
     return (
-        <div className='row'>
-            <div className='d-flex justify-content-between'>
-                <div className="col-md-3 d-none d-md-block border-end">
+        <div className='row bg-light' >
+            <div className='d-flex  '>
+                <div className="col-md-3 d-none d-md-block border-end ">
                     <Scrollspy
                         className="scrollspy sticky-custom list-unstyled" items={['section-1', 'section-2', 'section-3', 'section-4', 'section-5', 'section-6', 'section-7', 'section-8', 'section-9', 'section-10']}
                         currentClassName="isCur">
@@ -63,10 +67,12 @@ const RestaurantVerticalNav = ({ searchText }) => {
                 </div>
                 {
                     chatId.privetId &&
-                    <SupportEngine />
+                    <div className="support">
+                        <SupportEngine />
+                    </div>
                 }
-                {/* <SupportEngine/> */}
-                <div className="col-md-9 col-sm-12 ps-3">
+
+                <div className="col-md-9 col-sm-12 ps-3  ">
                     {searchFood.length > 0 ?
                         <OrdersBox searchFood={searchFood} /> : foodInfos.map((foodInfo, index) =>
                             <OrdersBox

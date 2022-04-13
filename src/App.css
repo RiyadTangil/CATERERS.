@@ -36,6 +36,25 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.cursor-pointer {
+  cursor: pointer;
+}
+.my-from {
+  outline: 0 !important;
+  border: 0 !important;
+  background-color: #f2f4f8 !important;
+  box-shadow: none !important;
+}
+.my-form-select {
+  outline: 0 !important;
+  border: 0 !important;
+  background-color: #f2f4f8 !important;
+  box-shadow: none !important;
+}
+.my-form-select option:hover{
+  background-color: #f2f4f8 !important;
+  display:none !important;
+}
 
 .svg-wrapper {
   position: relative;

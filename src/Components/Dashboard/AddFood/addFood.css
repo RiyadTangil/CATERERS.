@@ -1,3 +1,23 @@
-.service-bg{
-    background-color: "#F4FDFB" !important;
+.service-bg {
+  background-color: "#F4FDFB" !important;
+}
+
+.my-accordion-item {
+  outline: 0 !important;
+  border: 0 !important;
+  background-color: #f2f4f8 !important;
+  box-shadow: none !important;
+  color: rgb(41, 41, 41) !important;
+  font-weight: bold;
+}
+.bars {
+  display: inline-block;
+  width: 25px;
+  height: 4px;
+  margin: 2px 5px;
+  border-radius: 2px;
+  background-color: lightslategray;
+}
+.bars-bg{
+   color: lightslategray;
 }

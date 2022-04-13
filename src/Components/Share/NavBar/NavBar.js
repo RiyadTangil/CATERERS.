@@ -42,7 +42,7 @@ const NavBar = ({ setSearchResult }) => {
                             />
                         </Form>
                         <Link className="px-2 mx-3 text-light text-decoration-none" to="/dashboard/profile">menu</Link>
-                        {/* {loggedInUser.userType === "caterer" && <Link className="px-2 mx-3 text-light text-decoration-none" to="/dashboard/profile">menu</Link>} */}
+                        {/* {loggedInUser.typeOfPerson === "caterer" && <Link className="px-2 mx-3 text-light text-decoration-none" to="/dashboard/profile">menu</Link>} */}
                         <Card show={show} setShow={setShow} cardItems={cardItems} />
                         <p className="px-2 pt-3 mx-3 text-light text-decoration-none" onClick={() => setShow(true)}>
                             <FontAwesomeIcon icon={faCartArrowDown} /><span className="selected-card">{cardItems.length}</span></p>
@@ -69,7 +69,7 @@ const NavBar = ({ setSearchResult }) => {
                                                 <Button className="d-block  main-bg " size="sm">
                                                     my orders
                                                 </Button>
-                                                {loggedInUser.userType === "caterer" &&
+                                                {loggedInUser.typeOfPerson === "caterer" &&
                                                     <Button className="d-block mt-2 main-bg" size="sm">
                                                         my menu
                                                     </Button>}

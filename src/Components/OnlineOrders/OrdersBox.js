@@ -25,7 +25,7 @@ const OrdersBox = ({ navLink, categoryName,searchFood, foodInfo }) => {
     }
   
     return (
-        <div id={`section-${navLink}`}>
+        <div id={`section-${navLink}`} >
             {searchFood?.length>0? "":<h3 className="sticky-custom  text-m uted bg-white"> {categoryName} </h3>}
             
            { searchFood?.length>0?searchFood?.map((food, index) => <FoodCard key={index + 1} food={food} handleCard={handleCard}></FoodCard>):

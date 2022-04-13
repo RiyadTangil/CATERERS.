@@ -17,9 +17,7 @@ const EmailForm = props => {
     const project2 = "403b3ad3-e2b1-493e-ab0c-574723e2eae1"
     const privetKey1 = "23ee575c-8b8f-4a3d-9549-119c6993fcd3"
     const privetKey2 = "42767e1c-a6ed-413e-b63c-f6671c3ec0d5"
-    //     privetId
-// projectId
-console.log(chatId);
+
     function getOrCreateUser(callback) {
         axios.put(
             'https://api.chatengine.io/users/',

@@ -1,6 +1,8 @@
-.my-from {
+ .profile-accordion{
   outline: 0 !important;
   border: 0 !important;
-  background-color: #f2f4f8;
+  background-color: rgb(0, 156, 134) !important;
   box-shadow: none !important;
+  color: #F8F9FA !important;
+  font-weight: bold;
 }
