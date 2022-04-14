@@ -1,7 +1,13 @@
 .sticky-custom {
   position: sticky !important;
-  top: 100px !important;
+  top: 70px !important;
   z-index: 1021;
+}
+.category-text {
+  background-color: #f8f9fa;
+  display: inline-block;
+  border-radius: 8px;
+  padding: 10px;
 }
 .scrollspy li a {
   text-decoration: none;
@@ -15,12 +21,12 @@
   padding: 10px 0;
 }
 
-.isCurrent{
+.isCurrent {
   color: rgb(221, 134, 134);
   text-decoration: none;
   border-right: 2px solid red;
-  background-color: #fbe5c4;
+  background-color: rgb(255, 255, 255);
 }
-.support{
+.support {
   z-index: 1022;
 }

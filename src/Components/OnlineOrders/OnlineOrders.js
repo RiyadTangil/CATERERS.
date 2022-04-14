@@ -52,15 +52,26 @@ const RestaurantVerticalNav = ({ searchText }) => {
         setSearchFood(newArray)
     }, [searchText])
     return (
-        <div className='row bg-light' >
-            <div className='d-flex  '>
-                <div className="col-md-3 d-none d-md-block border-end ">
+        <div className='row  ' >
+            <div className='d-flex   '>
+                <div className="col-md-3 bg-light d-none d-md-block border-end ">
                     <Scrollspy
                         className="scrollspy sticky-custom list-unstyled" items={['section-1', 'section-2', 'section-3', 'section-4', 'section-5', 'section-6', 'section-7', 'section-8', 'section-9', 'section-10']}
                         currentClassName="isCur">
 
                         {categories?.map((category, index) => {
-                            return (<li key={index + 1} onClick={() => handleClick(category)} ><a href={`#section-${index + 1}`}><h5 className={tab === category ? "isCurrent" : ""} >{category}</h5></a></li>)
+                            return (<li
+                                key={index + 1}
+                                onClick={() => handleClick(category)}
+                            >
+                                <a href={`#section-${index + 1}`}>
+                                    <h5
+                                        className={tab === category ? "isCurrent" : ""}
+                                    >{category}
+                                    </h5>
+                                </a>
+                            </li>
+                            )
                         })}
 
                     </Scrollspy>
@@ -72,7 +83,7 @@ const RestaurantVerticalNav = ({ searchText }) => {
                     </div>
                 }
 
-                <div className="col-md-9 col-sm-12 ps-3  ">
+                <div className="col-md-8 col-sm-12 ms-5  ">
                     {searchFood.length > 0 ?
                         <OrdersBox searchFood={searchFood} /> : foodInfos.map((foodInfo, index) =>
                             <OrdersBox

@@ -35,8 +35,8 @@ const RestaurantInfo = ({ setSearchResult }) => {
                 </div>
             </div>
 
-            <div style={{ transform: "translateY(-70px)" }} className="bg-white">
-                <div>
+            <div className="bg-white sticky-info">
+             
                     <div className="container-fluid shadow border-top  p-3">
                         <div className="row ">
                             <div className="col-md-6 col-sm-12">
@@ -74,7 +74,7 @@ const RestaurantInfo = ({ setSearchResult }) => {
                     </div>
                 </div>
             </div>
-        </div>
+
 
     );
 };
