@@ -35,45 +35,45 @@ const RestaurantInfo = ({ setSearchResult }) => {
                 </div>
             </div>
 
-            <div className="bg-white sticky-info">
-             
-                    <div className="container-fluid shadow border-top  p-3">
-                        <div className="row ">
-                            <div className="col-md-6 col-sm-12">
-                                <div>
-                                    <h3 className="text-muted">{restaurantInfo?.shopName} <span className="bg-success text-white px-3 rounded-3">0</span></h3>
-                                    <div className="d-flex flex-start align-items-center py-1">
-                                        <h6 className="text-muted fw-light  m-0 "><span className="text-danger px-1  "><FontAwesomeIcon icon={faCheckSquare} /></span> {restaurantInfo?.address}</h6>
-                                        <p className="text-muted  ps-3 m-0">Delivery charge : <span>€10</span></p>
-                                    </div>
-                                    {/* <p className="text-muted">Maximum time to deliver : <span className=" px-1 ">10:16</span>Minutes.</p> */}
+            <div style={{ transform: "translateY(-80px)" }} className="bg-white sticky-info">
 
-
+                <div className="container-fluid shadow border-top  p-3">
+                    <div className="row ">
+                        <div className="col-md-6 col-sm-12">
+                            <div>
+                                <h3 className="text-muted">{restaurantInfo?.shopName} <span className="bg-success text-white px-3 rounded-3">0</span></h3>
+                                <div className="d-flex flex-start align-items-center py-1">
+                                    <h6 className="text-muted fw-light  m-0 "><span className="text-danger px-1  "><FontAwesomeIcon icon={faCheckSquare} /></span> {restaurantInfo?.address}</h6>
+                                    <p className="text-muted  ps-3 m-0">Delivery charge : <span>€10</span></p>
                                 </div>
+                                {/* <p className="text-muted">Maximum time to deliver : <span className=" px-1 ">10:16</span>Minutes.</p> */}
 
 
                             </div>
-                            <div className="col-md-6 col-sm-12  d-flex justify-content-end align-items-center">
 
 
-                                <div className="input-group w-75">
-                                    <span className="input-group-text  my-from" id="basic-addon1"><img src={searchImg}></img> </span>
-                                    <input onChange={(e) => setSearchResult(e.target.value.toLowerCase())}
-                                        type="search"
-                                        className="form-control my-from "
-                                        placeholder="search "
-                                        aria-label="Search"
-                                    ></input>
-                                   
-                                </div>
+                        </div>
+                        <div className="col-md-6 col-sm-12  d-flex justify-content-end align-items-center">
 
 
+                            <div className="input-group w-75">
+                                <span className="input-group-text  my-from" id="basic-addon1"><img src={searchImg}></img> </span>
+                                <input onChange={(e) => setSearchResult(e.target.value.toLowerCase())}
+                                    type="search"
+                                    className="form-control my-from "
+                                    placeholder="search "
+                                    aria-label="Search"
+                                ></input>
 
                             </div>
+
+
+
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
 
     );

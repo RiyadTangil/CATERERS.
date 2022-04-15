@@ -7,6 +7,8 @@ import { useParams } from 'react-router-dom';
 
 import { ChatContext } from '../../App';
 import SupportEngine from '../SupportEngine';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCar } from '@fortawesome/free-solid-svg-icons';
 const RestaurantVerticalNav = ({ searchText }) => {
     const [chatId, setChatId] = useContext(ChatContext);
     const [foodInfos, setFoodInfo] = useState([])
@@ -54,7 +56,7 @@ const RestaurantVerticalNav = ({ searchText }) => {
     return (
         <div className='row  ' >
             <div className='d-flex   '>
-                <div className="col-md-3 bg-light d-none d-md-block border-end ">
+                <div className="col-md-3 bg-light d-none mt-5 d-md-block border-end ">
                     <Scrollspy
                         className="scrollspy sticky-custom list-unstyled" items={['section-1', 'section-2', 'section-3', 'section-4', 'section-5', 'section-6', 'section-7', 'section-8', 'section-9', 'section-10']}
                         currentClassName="isCur">
@@ -83,7 +85,7 @@ const RestaurantVerticalNav = ({ searchText }) => {
                     </div>
                 }
 
-                <div className="col-md-8 col-sm-12 ms-5  ">
+                <div className="col-md-6 col-sm-12  ">
                     {searchFood.length > 0 ?
                         <OrdersBox searchFood={searchFood} /> : foodInfos.map((foodInfo, index) =>
                             <OrdersBox
@@ -92,6 +94,17 @@ const RestaurantVerticalNav = ({ searchText }) => {
                                 categoryName={foodInfo.categoryName}
                                 foodInfo={foodInfo}
                             ></OrdersBox>)}
+                </div>
+                <div className="col-md-3 col-sm-12   ">
+                    <div className="order-card">
+                        <h5 className="p-3 fw-bold">Your Order</h5>
+                        <p className="delivery-car d-flex  justify-content-center"> <FontAwesomeIcon className="fs-4 me-2" icon={faCar} /> deliver is now free</p>
+                        <div className="d-flex p-3 justify-content-between">
+                            <p>  Food & Beverage Subtotal</p>
+                            <p>  $18.00</p>
+                        </div>
+                        <p className="text-center checkout">  Checkout  </p>
+                    </div>
                 </div>
 
             </div>

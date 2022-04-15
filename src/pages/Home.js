@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import Header from '../Components/Home/Header/Header';
 import Restaurants from '../Components/Home/Restaurants/Restaurants';
 import Footer from '../Components/Share/Footer/Footer/Footer';
@@ -7,8 +7,8 @@ const Home = () => {
     const [searchText, setSearchResult] = useState("");
     return (
         <>
-            <NavBar  setSearchResult={setSearchResult}/>
-            <Header />
+            <NavBar setSearchResult={setSearchResult} />
+            {/* <Header /> */}
             <Restaurants searchText={searchText} />
             <Footer />
         </>

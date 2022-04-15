@@ -1,0 +1,7 @@
+.food-card-container {
+  background-color: rgb(255, 255, 255);
+  height: auto;
+  overflow: hidden;
+  border-radius:8px;
+  padding: 12px 24px;
+}
