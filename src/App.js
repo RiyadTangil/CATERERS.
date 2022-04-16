@@ -33,15 +33,13 @@ function App() {
   const [loggedInUser, setLoggedInUser] = useState({})
   const [chatId, setChatId] = useState({})
   const [cardItems, setCardItems] = useState([])
-  useEffect(() => {
+  const fetchUserInfo = async () => {
     const token = sessionStorage.getItem('token');
     if (!token) {
       return false;
     }
-
-    const decodedToken = jwt_decode(token);
-    const { name, email,shopImg, picture, typeOfPerson, user_id, address, privetId, projectId,shopName,shopPhone,phoneNo } = decodedToken;
-
+    const decodedToken = await jwt_decode(token);
+    const { name, email, shopImg, picture, typeOfPerson, user_id, address, privetId, projectId, shopName, shopPhone, phoneNo } = decodedToken;
     const newSignedInUser = {
       name: name,
       email: email,
@@ -57,6 +55,9 @@ function App() {
       address: address
     };
     setLoggedInUser(newSignedInUser)
+  }
+  useEffect(() => {
+    fetchUserInfo()
   }, [])
   return (
     <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
