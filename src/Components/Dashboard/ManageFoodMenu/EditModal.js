@@ -125,8 +125,8 @@ const EditModal = ({ show, setShow, editableFood }) => {
 
                                         < button type="submit" className="btn main-bg">Submit</button> :
 
-                                        <button class="btn btn-primary" type="button" disabled>
-                                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                        <button className="btn btn-primary" type="button" disabled>
+                                            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                             uploading
                                         </button>
 

@@ -7,11 +7,9 @@ const OrderList = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext)
     const [show, setShow] = useState(false)
     useEffect(() => {
-        fetch(`http://localhost:5000/orders/caterer-orders/${loggedInUser.user_id}`)
+        fetch(`http://localhost:5000/orders/caterer-orders/${loggedInUser._id}`)
             .then(res => res.json())
             .then(data => setOrderList(data))
-
-
     }, [orderList])
     const updateOrderStatus = (status, productKey) => {
         const updatedOrders = [];
@@ -41,7 +39,7 @@ const OrderList = () => {
     }
     return (
         <div className="row">
-            <SideVarNav/>
+            <SideVarNav />
             <div className="col-md-9 ">
                 <div className=" p-4 pr-5" style={{ backgroundColor: "#F4FDFB" }}>
                     <h5 className="text-brand">All Orders</h5>
@@ -62,7 +60,7 @@ const OrderList = () => {
                             <tbody>
                                 {
                                     orderList?.map((order, index) =>
-                                        <tr>
+                                        <tr key={index + 1}>
                                             <td>{index + 1}</td>
                                             <td className="">{order?.customer?.name}</td>
                                             <td className=" ">{order?.customer?.email}</td>

@@ -7,7 +7,7 @@ const DashboardContainer = ({ children, pageTitle }) => {
             <div className="row ">
                 <SideVarNav />
                 <div style={{ backgroundColor: "#F4FDFB", }} className="col-md-9 shadow  p-0  pb-5">
-                    <h3 class="text-muted text-center bg-light py-2  mt-5">{pageTitle} </h3>
+                    <h3 className="text-muted text-center bg-light py-2  mt-5">{pageTitle} </h3>
                     {children}
                 </div>
             </div>

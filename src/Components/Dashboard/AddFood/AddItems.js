@@ -1,10 +1,20 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Offcanvas } from 'react-bootstrap';
 import previewImg from '../../../images/previewimg.jpg';
 const AddItems = ({ imgLink, setFile, show, setShow, handleBlur, onSubmit, categories, editableFood }) => {
-    const [loggedInUser, setLoggedInUser] = React.useState(null);
-    const published = ["published", "unpublished"]
+    const [loggedInUser, setLoggedInUser] = useState(null);
+    const [published, setPublished] = useState([]);
+
+    useEffect(() => {
+        if (editableFood?.publishStatus == "published") {
+            setPublished(["published", "unpublished"])
+        }
+        else {
+            setPublished(["unpublished", "published"])
+        }
+    }, [editableFood])
+
     const avaiable = ["available", "unavailable"]
 
     const [imgUploading, setImgUpload] = useState(false)
@@ -16,7 +26,7 @@ const AddItems = ({ imgLink, setFile, show, setShow, handleBlur, onSubmit, categ
         imageData.set('key', '8ece3963cdc5195811f654de65d90034');
         imageData.append('image', newFile);
         //axios copied code form git hub search results of google
-     
+
         axios.post('https://api.imgbb.com/1/upload',
             imageData)
             .then(function (response) {
@@ -55,12 +65,12 @@ const AddItems = ({ imgLink, setFile, show, setShow, handleBlur, onSubmit, categ
                                 <label htmlFor="inputEmail4" className="form-label">description</label>
                                 <textarea type="text" defaultValue={editableFood?.foodDescription} name="description" className="form-control my-from" rows="3" placeholder="Food Description" onBlur={handleBlur} id=""></textarea>
                             </div>
-                            <div className="form-check pt-2">
+                            {/* <div className="form-check pt-2">
                                 <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault"></input>
                                 <label className="form-check-label" htmlFor="flexCheckDefault">
                                     Sold out
                                 </label>
-                            </div >
+                            </div > */}
                         </div>
                         <div className=" pt-3">
                             {categories?.length > 0 && categories ?
@@ -114,12 +124,12 @@ const AddItems = ({ imgLink, setFile, show, setShow, handleBlur, onSubmit, categ
 
                                 < button type="submit" className="btn main-bg">Submit</button> :
 
-                                    imgLink === null && imgUploading ?
-                                        <button className="btn btn-primary" type="button" disabled>
-                                            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                            uploading
-                                        </button> :
-                                        < button className="btn main-bg" disabled>Submit</button>
+                                imgLink === null && imgUploading ?
+                                    <button className="btn btn-primary" type="button" disabled>
+                                        <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                        uploading
+                                    </button> :
+                                    < button className="btn main-bg" disabled>Submit</button>
                             }
                         </div>
 

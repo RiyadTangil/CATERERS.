@@ -15,10 +15,10 @@ const ManageFoodMenu = () => {
     const [imgLink, setFile] = useState(null);
     const [info, setInfo] = useState({});
     useEffect(() => {
-        fetch(`http://localhost:5000/category/myFoods/${loggedInUser.user_id}`)
+        fetch(`http://localhost:5000/category/myFoods/${loggedInUser._id}`)
             .then(res => res.json())
             .then(data => setFoods(data))
-    }, [show])
+    }, [loggedInUser,show])
 
     const handleDelete = (event, id) => {
         const loading = toast.loading('Please wait...!');
@@ -91,39 +91,39 @@ const ManageFoodMenu = () => {
     return (
         // <div className="row">
         //     <SideVarNav />
-            <DashboardContainer pageTitle={"Manage Caterer Menu"}>
-                {
-                    <div>
-                        <table className="table table-borderless">
-                            <thead >
-                                <tr>
-                                    <th className="text-secondary text-left" scope="col">Sr No</th>
-                                    <th className="text-secondary" scope="col">Food Img</th>
-                                    <th className="text-secondary" scope="col">Food Name</th>
+        <DashboardContainer pageTitle={"Manage Caterer Menu"}>
+            {
+                <div>
+                    <table className="table table-borderless">
+                        <thead >
+                            <tr>
+                                <th className="text-secondary text-left" scope="col">Sr No</th>
+                                <th className="text-secondary" scope="col">Food Img</th>
+                                <th className="text-secondary" scope="col">Food Name</th>
 
-                                    <th className="text-secondary" scope="col">price</th>
-                                    <th className="text-secondary" scope="col">edit</th>
-                                    <th className="text-secondary" scope="col">action</th>
-                                </tr>
-                            </thead>
+                                <th className="text-secondary" scope="col">price</th>
+                                <th className="text-secondary" scope="col">edit</th>
+                                <th className="text-secondary" scope="col">action</th>
+                            </tr>
+                        </thead>
 
-                            {foods?.map((food, index) => <MenuDetails key={index + 1} foods={food} handleDelete={handleDelete} handleEdit={handleEdit} />)}
-                            <AddItems
-                                show={show}
-                                setShow={setShow}
-                                imgLink={imgLink}
-                                setFile={setFile}
-                                handleBlur={handleBlur}
-                                onSubmit={onSubmit}
-                                categories={null}
-                                editableFood={editableFood}
-                            />
+                        {foods.length > 0 ? foods.map((food, index) => <MenuDetails key={index + 1} foods={food} handleDelete={handleDelete} handleEdit={handleEdit} />): null}
+                        <AddItems
+                            show={show}
+                            setShow={setShow}
+                            imgLink={imgLink}
+                            setFile={setFile}
+                            handleBlur={handleBlur}
+                            onSubmit={onSubmit}
+                            categories={null}
+                            editableFood={editableFood}
+                        />
 
-                        </table>
-                    </div>
-                }
-            </DashboardContainer>
-         
+                    </table>
+                </div>
+            }
+        </DashboardContainer>
+
         // </div>
     );
 };

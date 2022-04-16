@@ -255,9 +255,9 @@ const Login = (props) => {
                                     <input type="file" name="img" onChange={handleFileChange} className="form-control" placeholder="Food img"></input>
                                 </div>
                                 {imgUploading &&
-                                <div class="d-flex align-items-center">
+                                <div className="d-flex align-items-center">
                                     <strong>Uploading...</strong>
-                                    <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+                                    <div className="spinner-border ms-auto" role="status" aria-hidden="true"></div>
                                 </div>}
                             </>}
                     </form>

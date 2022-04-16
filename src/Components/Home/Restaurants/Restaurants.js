@@ -40,15 +40,15 @@ const Restaurants = ({ searchText }) => {
                                     200+ results for "1237 Aird St"</li>
                                 <li className="text-decoration-underline">Clear All</li>
 
-                                <div class="accordion" id="accordionPanelsStayOpenExample">
-                                    <div class="accordion-item border-0">
-                                        <h2 class="accordion-header my-from" id="panelsStayOpen-headingOne">
-                                            <button class="accordion-button  my-from" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                <div className="accordion" id="accordionPanelsStayOpenExample">
+                                    <div className="accordion-item border-0">
+                                        <h2 className="accordion-header my-from" id="panelsStayOpen-headingOne">
+                                            <button className="accordion-button  my-from" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
                                                 Sort
                                             </button>
                                         </h2>
-                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-                                            <div class="accordion-body ">
+                                        <div id="panelsStayOpen-collapseOne" className="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                                            <div className="accordion-body ">
                                                 <Form>
                                                     {radioValue.map((type, index) => (
                                                         <div key={`inline-${index}`} className="mb-3">
@@ -68,14 +68,14 @@ const Restaurants = ({ searchText }) => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="accordion-item border-0">
-                                        <h2 class="accordion-header my-from" id="panelsStayOpen-headingTwo">
-                                            <button class="accordion-button collapsed my-from" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                                    <div className="accordion-item border-0">
+                                        <h2 className="accordion-header my-from" id="panelsStayOpen-headingTwo">
+                                            <button className="accordion-button collapsed my-from" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
                                                 From Uber Eats
                                             </button>
                                         </h2>
-                                        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
-                                            <div class="accordion-body">
+                                        <div id="panelsStayOpen-collapseTwo" className="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                                            <div className="accordion-body">
                                                 <Form>
                                                     {uberEat.map((type, index) => (
                                                         <div key={`inline-${index}`} className="mb-3">
@@ -95,14 +95,14 @@ const Restaurants = ({ searchText }) => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="accordion-item border-0">
-                                        <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-                                            <button class="accordion-button my-from collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                                    <div className="accordion-item border-0">
+                                        <h2 className="accordion-header" id="panelsStayOpen-headingThree">
+                                            <button className="accordion-button my-from collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
                                                 Price Range
                                             </button>
                                         </h2>
-                                        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
-                                            <div class=" mt-3 row">
+                                        <div id="panelsStayOpen-collapseThree" className="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+                                            <div className=" mt-3 row">
                                                 {dollars.map((dollar, index) => <p className="col-md-3 text-center circle-rounded  bg-light">{dollar}</p>)}
 
                                             </div>

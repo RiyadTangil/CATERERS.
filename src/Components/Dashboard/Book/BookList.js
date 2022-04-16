@@ -8,7 +8,7 @@ const BookList = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext)
     const [isLoading, setIsLoading] = useState(false)
     useEffect(() => {
-        fetch(`http://localhost:5000/orders/my-orders/${loggedInUser.user_id}`)
+        fetch(`http://localhost:5000/orders/my-orders/${loggedInUser._id}`)
             .then(res => res.json())
             .then(data => {
                 // const myOrder = data.filter(orders => orders.email === loggedInUser.email)
@@ -24,8 +24,8 @@ const BookList = () => {
                 <div className=" p-4 pr-5" style={{ backgroundColor: "#F4FDFB" }}>
                     <div className="d-flex justify-content-center ">
                         {bookingList?.length < 1 && !isLoading && <div className="d-flex py-5 my-5 justify-content-center">
-                            <div class="spinner-border text-success" role="status">
-                                <span class="visually-hidden">Loading...</span>
+                            <div className="spinner-border text-success" role="status">
+                                <span className="visually-hidden">Loading...</span>
                             </div>
                         </div>}
                         {bookingList?.length < 1 && isLoading ?

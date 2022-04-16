@@ -30,7 +30,7 @@ const ManageCategory = ({ reload }) => {
             })
     }
     useEffect(() => {
-        fetch(`http://localhost:5000/category/categoryByUser/${loggedInUser.user_id}`)
+        fetch(`http://localhost:5000/category/categoryByUser/${loggedInUser._id}`)
             .then(res => res.json())
             .then(data => setCategories(data))
     }, [reload])

@@ -32,10 +32,10 @@ const AddFood = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/category/myFoods/${loggedInUser.user_id}`)
+        fetch(`http://localhost:5000/category/myFoods/${loggedInUser._id}`)
             .then(res => res.json())
             .then(data => setCategories(data))
-    }, [reloadCategory])
+    }, [loggedInUser, reloadCategory])
     const [show, setShow] = useState(false);
     const onSubmit = (e) => {
         const loading = toast.loading('Please wait...!');
@@ -51,7 +51,7 @@ const AddFood = () => {
                 "description": info.description,
                 "price": info.price,
                 "category": "test",
-                "userId": loggedInUser.user_id,
+                "userId": loggedInUser._id,
                 "produceAvailable": info.produceAvailable,
                 "publishStatus": info.publishStatus,
                 "catererId": info.category,
@@ -80,13 +80,13 @@ const AddFood = () => {
                 <>
                     <AddCategory setReloadCategory={setReloadCategory} />
                     <div className="accordion px-2" id="accordionExample">
-                        {categories?.map((categorizedFoods, index) =>
+                        {categories.length > 0 ? categories.map((categorizedFoods, index) =>
                             <CategoryWithFood
                                 categorizedFoods={categorizedFoods}
                                 index={index}
                                 setShow={setShow}
                             />
-                        )}
+                        ) : null}
                     </div>
                     <AddItems
                         show={show}

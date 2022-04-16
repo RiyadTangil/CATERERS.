@@ -12,7 +12,7 @@ const PrivetRoute = ({ children, ...rest }) => {
             return false;
         }
         const decodedToken = jwt_decode(token);
-        const { name, email, picture, typeOfPerson, user_id, address, privetId, projectId,shopName,shopImg,shopPhone,phoneNo } = decodedToken;
+        const { name, email, picture, typeOfPerson, _id, address, privetId, projectId,shopName,shopImg,shopPhone,phoneNo } = decodedToken;
         const newSignedInUser = {
             name: name,
             email: email,
@@ -22,7 +22,7 @@ const PrivetRoute = ({ children, ...rest }) => {
             img: picture,
             shopImg: shopImg,
             typeOfPerson: typeOfPerson,
-            user_id: user_id,
+            _id: _id,
             privetId: privetId,
             projectId: projectId,
             address: address

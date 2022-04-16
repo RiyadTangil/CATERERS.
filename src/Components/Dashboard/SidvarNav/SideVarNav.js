@@ -59,9 +59,9 @@ const SideVarNav = () => {
             <Nav.Item>
               <Link to="/dashboard/add-food"><FontAwesomeIcon icon={faPlusCircle} /> Add Menu</Link>
             </Nav.Item>
-            <Nav.Item>
+            {/* <Nav.Item>
               <Link to="/dashboard/manage-category"><FontAwesomeIcon icon={faPlusCircle} /> Manage  Category</Link>
-            </Nav.Item>
+            </Nav.Item> */}
             <Nav.Item>
               <Link to="/dashboard/manage-food-menu"><FontAwesomeIcon icon={faTasks} /> Manage Food Menu</Link>
             </Nav.Item>

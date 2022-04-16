@@ -18,14 +18,14 @@ const RestaurantCard = ({ restaurant, handleCard, index }) => {
             <div
                 onClick={() => history.push(`/restaurant/${restaurant.user._id}`)}
                 className="card rest-card" >
-                <div class="card ">
-                    <img src={restaurant?.user?.shopImg || food} class="card-img-top" alt="..."></img>
-                    <div class="card-body  pb-0">
+                <div className="card ">
+                    <img src={restaurant?.user?.shopImg || food} className="card-img-top" alt="..."></img>
+                    <div className="card-body  pb-0">
                         <div className="d-flex justify-content-between align-items-center">
                             <h5 className="card-text   text-capitalize">{restaurant?.user?.shopName}</h5>
                             <h6 className="card-text  p-2 bg-light rounded-circle "> {"4.8"}</h6>
                         </div>
-                        <img onClick={(e) => setToggleHeart(toggleHeart + 1)} src={toggleHeart % 2 == 0 ? heart : heartLess} style={{ height: "18px" }} class="img-fluid heart position-absolute top-0 end-0 mt-2 me-2" alt="..."></img>
+                        <img onClick={(e) => setToggleHeart(toggleHeart + 1)} src={toggleHeart % 2 == 0 ? heart : heartLess} style={{ height: "18px" }} className="img-fluid heart position-absolute top-0 end-0 mt-2 me-2" alt="..."></img>
                         <p className="text-muted"> <FontAwesomeIcon className="text-success" icon={faTicketAlt} /> $0.99 Delivery Fee • 20–30 min</p>
 
                     </div>

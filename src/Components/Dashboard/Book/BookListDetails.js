@@ -3,17 +3,17 @@ const BookListDetails = ({ booking ,orderLength}) => {
     const statusStyle = `text-light p-2 rounded-3 ${booking.status === 'Done' ? 'bg-success' : booking.status === 'Pending' ? 'bg-danger' : 'bg-warning'}`
     return (
         <div className={` ${orderLength==1?"col-md-12":"col-md-6"} col-sm-12`}>
-            <div class="card mb-3">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img style={{ height: '100px' }} src="https://img.freepik.com/free-photo/concept-indian-cuisine-baked-chicken-wings-legs-honey-mustard-sauce-serving-dishes-restaurant-black-plate-indian-spices-wooden-table-background-image_127425-18.jpg?size=626&ext=jpg" class="img-fluid rounded-start" alt="..."></img>
+            <div className="card mb-3">
+                <div className="row g-0">
+                    <div className="col-md-4">
+                        <img style={{ height: '100px' }} src="https://img.freepik.com/free-photo/concept-indian-cuisine-baked-chicken-wings-legs-honey-mustard-sauce-serving-dishes-restaurant-black-plate-indian-spices-wooden-table-background-image_127425-18.jpg?size=626&ext=jpg" className="img-fluid rounded-start" alt="..."></img>
                     </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
+                    <div className="col-md-8">
+                        <div className="card-body">
                             <div className="d-flex justify-content-between align-items-center">
-                                <h5 class="card-title">$ {booking.price}</h5>
+                                <h5 className="card-title">$ {booking.price}</h5>
                                 <p className={statusStyle}>{booking.status}</p></div>
-                            <p class="card-text"><small class="text-muted"> Ordered at {booking.orderTime.slice(0, 10)}</small></p>
+                            <p className="card-text"><small className="text-muted"> Ordered at {booking.orderTime.slice(0, 10)}</small></p>
                         </div>
                     </div>
                 </div>

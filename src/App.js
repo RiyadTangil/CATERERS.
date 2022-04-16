@@ -39,7 +39,7 @@ function App() {
       return false;
     }
     const decodedToken = await jwt_decode(token);
-    const { name, email, shopImg, picture, typeOfPerson, user_id, address, privetId, projectId, shopName, shopPhone, phoneNo } = decodedToken;
+    const { name, email, shopImg, picture, typeOfPerson, _id, address, privetId, projectId, shopName, shopPhone, phoneNo } = decodedToken;
     const newSignedInUser = {
       name: name,
       email: email,
@@ -49,7 +49,7 @@ function App() {
       img: picture,
       shopImg: shopImg,
       typeOfPerson: typeOfPerson,
-      user_id: user_id,
+      _id: _id,
       privetId: privetId,
       projectId: projectId,
       address: address

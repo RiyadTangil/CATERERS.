@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { UserContext } from '../../../App';
 import man from "../../../images/man.png"
 import swal from 'sweetalert';
@@ -10,9 +10,13 @@ import './profile.css'
 const Profile = () => {
     const [info, setInfo] = useState({});
     const [loggedInUser, setLoggedInUser] = useContext(UserContext)
+    const [userInfo, setUserInfo] = useState([])
     const [imgUploading, setImgUpload] = useState(false)
+    const [changePassword, setChangePassword] = useState(false)
     const [imgLink, setFile] = useState(false)
-    console.log(loggedInUser);
+    const [reloadUser, seReloadUser] = useState(false)
+
+
     const handleFileChange = (e) => {
         setFile(null)
         setImgUpload(true)
@@ -41,11 +45,11 @@ const Profile = () => {
         console.log(newInfo)
         setInfo(newInfo);
     }
-    console.log(info, imgLink)
-    const onSubmit = (e) => {
+
+    const onSubmit = async (e) => {
         const loading = toast.loading('Please wait...!');
         e.preventDefault()
-        fetch(`http://localhost:5000/user2/${loggedInUser.user_id}`, {
+        await fetch(`http://localhost:5000/user2/${loggedInUser._id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/Json'
@@ -67,7 +71,12 @@ const Profile = () => {
             .then(response => response.json())
             .then(data => {
                 toast.dismiss(loading);
-                if (data) {
+                if (data?.token) {
+                    console.log(data?.data)
+                    console.log(data?.token)
+                    setLoggedInUser(data?.data)
+                    sessionStorage.setItem("token", data?.token);
+                    seReloadUser(!reloadUser)
                     return swal("User Updated", "User has been added successful.", "success");
                 }
                 swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true });
@@ -110,6 +119,21 @@ const Profile = () => {
                                     <label for="inputEmail4" className="form-label">Phone number</label>
                                     <input type="text" name="phoneNo" onBlur={handleBlur} className="form-control my-from" defaultValue={loggedInUser?.phoneNo} id=""></input>
                                 </div>
+                                <div className="col-md-4">
+                                    <label for="inputEmail4" onClick={() => setChangePassword(true)} className="form-label cursor-pointer">{!changePassword ? "Change password" : "Password"}</label>
+                                    {changePassword ? <input type="text" placeholder="current password" onBlur={handleBlur} className="form-control my-from" id=""></input> : null}
+                                </div>
+                                {changePassword ? <>
+
+                                    <div className="col-md-4">
+
+                                        <input type="text" placeholder="new password" onBlur={handleBlur} className="form-control my-from password-margin" id=""></input>
+                                    </div>
+                                    <div className="col-md-4">
+
+                                        <input type="text" placeholder="confirm new password" onBlur={handleBlur} className="form-control my-from password-margin" id=""></input>
+                                    </div>
+                                </> : null}
 
 
                                 {loggedInUser?.typeOfPerson == "caterer" ?
@@ -137,7 +161,7 @@ const Profile = () => {
                                                             </div>
 
                                                             <div className="col-md-6">
-                                                                <img src={imgLink ? imgLink : loggedInUser?.shopImg} class="img-thumbnail" alt="..."></img>
+                                                                <img src={imgLink ? imgLink : loggedInUser?.shopImg} className="img-thumbnail" alt="..."></img>
                                                             </div>
                                                             <div className="col-md-6 d-flex flex-column justify-content-center">
                                                                 <label for="inputEmail4" className="form-label">Shop number</label>
