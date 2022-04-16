@@ -9,8 +9,8 @@ const SupportAdmin = () => {
     return (
         <ChatEngine
             projectID={loggedInUser?.projectId}
-            userName='Riyad hasan'
-            userSecret='11559988'
+            userName='tasnim'
+            userSecret='tasnim'
             height='calc(100vh - 12px)'
         />
     );
