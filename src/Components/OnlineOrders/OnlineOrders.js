@@ -23,7 +23,7 @@ const RestaurantVerticalNav = ({ searchText }) => {
     //     dispatch(getRestaurantList());
     // }, [dispatch]);
 
-    const radioValue = ["min/max order fields", "food based off", "number of people", "Weight of Food", "Food wait time", "avaliable today or pre –order"];
+    const radioValue = [" Minimum order", "Minimum order  ", "food based off", "number of people", "Weight of Food", "Food wait time", "avaliable today ", "avaliable today "];
 
     useEffect(() => {
         fetch(`http://localhost:5000/category/foodByCategory/${id}`)
