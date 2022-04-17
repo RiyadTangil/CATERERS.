@@ -16,6 +16,7 @@ const RestaurantVerticalNav = ({ searchText }) => {
     const [categories, setCategories] = useState([])
     const [tab, setTab] = useState(categories[0])
     const { id } = useParams();
+    console.log(id,"id from online order")
     // const dispatch = useDispatch();
     // useEffect(() => {
     //     dispatch(getRestaurantList());

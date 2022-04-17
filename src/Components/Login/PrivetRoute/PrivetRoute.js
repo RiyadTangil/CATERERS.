@@ -12,7 +12,7 @@ const PrivetRoute = ({ children, ...rest }) => {
             return false;
         }
         const decodedToken = jwt_decode(token);
-        const { name, email, picture, typeOfPerson, _id, address, privetId, projectId,shopName,shopImg,shopPhone,phoneNo } = decodedToken;
+        const { name, email, password, picture, typeOfPerson, _id, address, privetId, projectId, shopName, shopImg, shopPhone, phoneNo } = decodedToken;
         const newSignedInUser = {
             name: name,
             email: email,
@@ -20,23 +20,24 @@ const PrivetRoute = ({ children, ...rest }) => {
             shopName: shopName,
             shopPhone: shopPhone,
             img: picture,
+            password: password,
             shopImg: shopImg,
             typeOfPerson: typeOfPerson,
             _id: _id,
             privetId: privetId,
             projectId: projectId,
             address: address
-          };
-          setLoggedInUser(newSignedInUser)
-     
+        };
+        setLoggedInUser(decodedToken)
+
         // get current time
         const currentTime = new Date().getTime() / 1000;
         // compare the expiration time with the current time
         // will return false if expired and will return true if not expired
         return decodedToken.exp > currentTime;
-      
+
     }
- 
+
 
     return (
         <Route

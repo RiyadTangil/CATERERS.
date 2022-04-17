@@ -39,7 +39,8 @@ function App() {
       return false;
     }
     const decodedToken = await jwt_decode(token);
-    const { name, email, shopImg, picture, typeOfPerson, _id, address, privetId, projectId, shopName, shopPhone, phoneNo } = decodedToken;
+ 
+    const { name, email, shopImg, password, picture, typeOfPerson, _id, address, privetId, projectId, shopName, shopPhone, phoneNo } = decodedToken;
     const newSignedInUser = {
       name: name,
       email: email,
@@ -48,13 +49,14 @@ function App() {
       shopPhone: shopPhone,
       img: picture,
       shopImg: shopImg,
+      password: password,
       typeOfPerson: typeOfPerson,
       _id: _id,
       privetId: privetId,
       projectId: projectId,
       address: address
     };
-    setLoggedInUser(newSignedInUser)
+    setLoggedInUser(decodedToken)
   }
   useEffect(() => {
     fetchUserInfo()

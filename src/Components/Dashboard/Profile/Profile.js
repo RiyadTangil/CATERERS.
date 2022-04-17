@@ -47,45 +47,57 @@ const Profile = () => {
     }
 
     const onSubmit = async (e) => {
-        const loading = toast.loading('Please wait...!');
-        e.preventDefault()
-        await fetch(`http://localhost:5000/user2/${loggedInUser._id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/Json'
-            },
-            body: JSON.stringify({
+        if (info.confirmPassword !== info.newPassword) {
+            return swal("Failed!", "new password is not matching with confirm password .", "error", { dangerMode: true });
+        }
+        if (info.newPassword === loggedInUser.password) {
+            return swal("Failed!", "Current password can not be  previous password .", "error", { dangerMode: true });
+        }
 
-                "name": info.name,
-                "address": info.address,
-                "phoneNo": info.phoneNo,
-                "email": info.email,
-                "shopName": info.shopName,
-                "shopPhone": info.shopPhone,
-                "projectId": info.projectId,
-                "privetId": info.privetId,
-                "shopImg": imgLink,
-            })
+        else {
+            const loading = toast.loading('Please wait...!');
+            e.preventDefault()
+            await fetch(`http://localhost:5000/user2/${loggedInUser._id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/Json'
+                },
+                body: JSON.stringify({
 
-        })
-            .then(response => response.json())
-            .then(data => {
-                toast.dismiss(loading);
-                if (data?.token) {
-                    console.log(data?.data)
-                    console.log(data?.token)
-                    setLoggedInUser(data?.data)
-                    sessionStorage.setItem("token", data?.token);
-                    seReloadUser(!reloadUser)
-                    return swal("User Updated", "User has been added successful.", "success");
-                }
-                swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true });
-            })
-            .catch(error => {
-                toast.dismiss(loading);
-                swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true });
-            })
+                    "name": info.name,
+                    "address": info.address,
+                    "phoneNo": info.phoneNo,
+                    "email": info.email,
+                    "shopName": info.shopName,
+                    "shopPhone": info.shopPhone,
+                    "projectId": info.projectId,
+                    "privetId": info.privetId,
+                    "password": info.newPassword,
+                    "deliveryFee": info.deliveryFee,
+                    "deliveryTime": info.deliveryTime,
+                    "shopImg": imgLink,
+                })
 
+            })
+                .then(response => response.json())
+                .then(data => {
+                    toast.dismiss(loading);
+                    if (data?.token) {
+                        console.log(data?.data)
+                        console.log(data?.token)
+                        setLoggedInUser(data?.data)
+                        sessionStorage.setItem("token", data?.token);
+                        seReloadUser(!reloadUser)
+                        return swal("User Updated", "User has been added successful.", "success");
+                    }
+                    swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true });
+                })
+                .catch(error => {
+                    toast.dismiss(loading);
+                    swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true });
+                })
+
+        }
     }
 
     return (
@@ -121,17 +133,17 @@ const Profile = () => {
                                 </div>
                                 <div className="col-md-4">
                                     <label for="inputEmail4" onClick={() => setChangePassword(true)} className="form-label cursor-pointer">{!changePassword ? "Change password" : "Password"}</label>
-                                    {changePassword ? <input type="text" placeholder="current password" onBlur={handleBlur} className="form-control my-from" id=""></input> : null}
+                                    {changePassword ? <input type="text" placeholder="current password" onBlur={handleBlur} className="form-control my-from" name="currentPassword"></input> : null}
                                 </div>
                                 {changePassword ? <>
 
                                     <div className="col-md-4">
 
-                                        <input type="text" placeholder="new password" onBlur={handleBlur} className="form-control my-from password-margin" id=""></input>
+                                        <input type="text" placeholder="new password" onBlur={handleBlur} className="form-control my-from password-margin" name="newPassword"></input>
                                     </div>
                                     <div className="col-md-4">
 
-                                        <input type="text" placeholder="confirm new password" onBlur={handleBlur} className="form-control my-from password-margin" id=""></input>
+                                        <input type="text" placeholder="confirm new password" onBlur={handleBlur} className="form-control my-from password-margin" name="confirmPassword"></input>
                                     </div>
                                 </> : null}
 
@@ -157,6 +169,16 @@ const Profile = () => {
                                                             <div className="col-md-6">
                                                                 <label for="inputEmail4" className="form-label">Shop Number</label>
                                                                 <input type="text" name="shopPhone" onBlur={handleBlur} defaultValue={loggedInUser?.shopPhone} className="form-control my-from" id=""></input>
+
+                                                            </div>
+                                                            <div className="col-md-6">
+                                                                <label for="inputEmail4" className="form-label">delivery time</label>
+                                                                <input type="text" name="deliveryTime" onBlur={handleBlur} defaultValue={loggedInUser?.deliveryTime} className="form-control my-from" id=""></input>
+
+                                                            </div>
+                                                            <div className="col-md-6">
+                                                                <label for="inputEmail4" className="form-label">Delivery Fee</label>
+                                                                <input type="text" name="deliveryFee" onBlur={handleBlur} defaultValue={"$" + loggedInUser?.deliveryFee} className="form-control my-from" id=""></input>
 
                                                             </div>
 

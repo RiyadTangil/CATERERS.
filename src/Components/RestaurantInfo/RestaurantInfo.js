@@ -9,6 +9,7 @@ const RestaurantInfo = ({ setSearchResult }) => {
     const [restaurantInfo, setRestaurantInfo] = useState([])
 
     const { id } = useParams();
+    console.log(id)
     useEffect(() => {
         fetch(`http://localhost:5000/user2/restaurantInfo/${id}`)
             .then(res => res.json())

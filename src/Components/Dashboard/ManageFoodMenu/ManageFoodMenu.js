@@ -67,6 +67,7 @@ const ManageFoodMenu = () => {
                 "description": info.description,
                 "price": info.price,
                 "category": info.category,
+                "vat": info.vat,
                 "produceAvailable": info.produceAvailable,
                 "publishStatus": info.publishStatus,
             })

@@ -11,6 +11,12 @@ import { faHeart } from '@fortawesome/free-regular-svg-icons';
 const RestaurantCard = ({ restaurant, handleCard, index }) => {
     let history = useHistory();
     const [toggleHeart, setToggleHeart] = useState(1)
+    // const handleRoute = (e, id) => {
+    //     if (e.target.id !== "heart") {
+    //         console.log(id);
+    //         history.push(`/restaurant/${id}`)
+    //     }
+    // }
 
     return (
 
