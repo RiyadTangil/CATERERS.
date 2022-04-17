@@ -88,6 +88,7 @@ const Profile = () => {
                         setLoggedInUser(data?.data)
                         sessionStorage.setItem("token", data?.token);
                         seReloadUser(!reloadUser)
+                        changePassword(false)
                         return swal("User Updated", "User has been added successful.", "success");
                     }
                     swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true });

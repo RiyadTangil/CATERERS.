@@ -71,7 +71,7 @@ const Restaurants = ({ searchText }) => {
                                     <div className="accordion-item border-0">
                                         <h2 className="accordion-header my-from" id="panelsStayOpen-headingTwo">
                                             <button className="accordion-button collapsed my-from" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                                                From Uber Eats
+                                            From Uranium
                                             </button>
                                         </h2>
                                         <div id="panelsStayOpen-collapseTwo" className="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
