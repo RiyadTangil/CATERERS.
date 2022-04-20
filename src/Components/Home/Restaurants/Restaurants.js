@@ -6,9 +6,40 @@ const Restaurants = ({ searchText }) => {
     const [restaurants, setAllRestaurant] = useState([])
     const [searchedRestaurants, setSearchedRestaurants] = useState([])
     const [toggleHeart, setToggleHeart] = useState(false)
+    const [filteringClicked, setFilteringClicked] = useState(false)
     const radioValue = ["Picked for you (default)", "Highest Rated", "Most Reviewed", "Most Recent"];
     const uberEat = ["Deals", "Best overall"];
     const dollars = ["$", "$$ ", "$$$", "$$$$"];
+    const handleFiltering = (label, type) => {
+
+        setFilteringClicked(!filteringClicked)
+        if (label == "Highest Rated") {
+
+            let hightestToLowest = restaurants.sort((restaurant, nextRestaurant) => nextRestaurant.user?.rating - restaurant.user?.rating);
+            setSearchedRestaurants(hightestToLowest)
+
+
+        }
+        else if (label == "Most Recent") {
+
+            // let lowestToHighest = restaurants.sort((restaurant, nextRestaurant) => restaurant.user?.rating - nextRestaurant.user?.rating);
+            let recentRestaurants = restaurants.sort((restaurant, nextRestaurant) => new Date(nextRestaurant?.date).getTime() - new Date(restaurant?.date).getTime());
+            setSearchedRestaurants(recentRestaurants)
+
+        }
+        else if (type == "dollar") {
+            console.log(label, "dollar label");
+
+            // let lowestToHighest = restaurants.sort((restaurant, nextRestaurant) => restaurant.user?.rating - nextRestaurant.user?.rating);
+            let hightestToLowest = restaurants.sort((restaurant, nextRestaurant) => nextRestaurant.user?.rating - restaurant.user?.rating);
+            setSearchedRestaurants(hightestToLowest)
+
+        }
+        else {
+            setSearchedRestaurants(searchedRestaurants)
+        }
+    }
+
     useEffect(() => {
         fetch("http://localhost:5000/restaurant")
             .then(res => res.json())
@@ -17,10 +48,7 @@ const Restaurants = ({ searchText }) => {
 
     useEffect(() => {
         const matchedRestaurants = restaurants.filter(restaurant => restaurant.user?.shopName.toLowerCase().includes(searchText.toLowerCase()))
-        // const filteredRestaurants = restaurant?.foods?.filter(foodItem => .user?.shopName.toLowerCase().includes(searchText.toLowerCase()))
-        // restaurants(filteredRestaurants)
-        setSearchedRestaurants(matchedRestaurants)
-        console.log(matchedRestaurants);
+        setSearchedRestaurants(matchedRestaurants?.length > 0 ? matchedRestaurants : null)
 
     }, [searchText])
     return (
@@ -50,12 +78,13 @@ const Restaurants = ({ searchText }) => {
                                         <div id="panelsStayOpen-collapseOne" className="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
                                             <div className="accordion-body ">
                                                 <Form>
-                                                    {radioValue.map((type, index) => (
+                                                    {radioValue.map((label, index) => (
                                                         <div key={`inline-${index}`} className="mb-3">
                                                             <Form.Check
                                                                 inline
-                                                                label={type}
-                                                                checked
+                                                                label={label}
+
+                                                                onClick={() => { handleFiltering(label, "rating") }}
                                                                 name="group1"
                                                                 type={"radio"}
                                                                 id={`inline-${index}`}
@@ -71,17 +100,17 @@ const Restaurants = ({ searchText }) => {
                                     <div className="accordion-item border-0">
                                         <h2 className="accordion-header my-from" id="panelsStayOpen-headingTwo">
                                             <button className="accordion-button collapsed my-from" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                                            From Uranium
+                                                From Uranium
                                             </button>
                                         </h2>
                                         <div id="panelsStayOpen-collapseTwo" className="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
                                             <div className="accordion-body">
                                                 <Form>
-                                                    {uberEat.map((type, index) => (
+                                                    {uberEat.map((label, index) => (
                                                         <div key={`inline-${index}`} className="mb-3">
                                                             <Form.Check
                                                                 inline
-                                                                label={type}
+                                                                label={label}
 
                                                                 name="group1"
                                                                 type={"switch"}
@@ -102,8 +131,12 @@ const Restaurants = ({ searchText }) => {
                                             </button>
                                         </h2>
                                         <div id="panelsStayOpen-collapseThree" className="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
-                                            <div className=" mt-3 row">
-                                                {dollars.map((dollar, index) => <p className="col-md-3 text-center circle-rounded  bg-light">{dollar}</p>)}
+                                            <div className=" mt-3 g-0 mx-1 row">
+                                                {dollars.map((dollar, index) =>
+                                                    <div className="col-md-3 px-1 " key={index + 1} onClick={() => { handleFiltering(index + 1, "dollar") }}>
+                                                        <p className="dollar bg-light ">{dollar}</p>
+                                                    </div>
+                                                )}
 
                                             </div>
                                         </div>
@@ -116,7 +149,7 @@ const Restaurants = ({ searchText }) => {
                         <div className="col-md-9 ">
                             <div className="row g-2 ms-2">
                                 {
-                                    searchText.length > 0 ?
+                                    searchedRestaurants.length !== 0 ?
                                         searchedRestaurants?.map((restaurant, index) => <RestaurantCard restaurant={restaurant} toggleHeart={toggleHeart} setToggleHeart={setToggleHeart} index={index + 1} key={restaurant._id}></RestaurantCard>) :
                                         restaurants?.map((restaurant, index) => <RestaurantCard restaurant={restaurant} toggleHeart={toggleHeart} setToggleHeart={setToggleHeart} index={index + 1} key={restaurant._id}></RestaurantCard>)
                                 }

@@ -18,3 +18,11 @@
 .sidebar-container:only-child {
   padding-bottom: 25px;
 }
+.dollar{
+  height:50px;
+  width: 50px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border-radius:50%;
+}
