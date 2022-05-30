@@ -9,7 +9,7 @@ const ManageCategory = ({ reload }) => {
     const handleDelete = (e, id) => {
 
         const loading = toast.loading('Please wait...!');
-        fetch(`http://localhost:5000/category/${id}`, {
+        fetch(`https://guarded-wave-53446.herokuapp.com/category/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())
@@ -30,7 +30,7 @@ const ManageCategory = ({ reload }) => {
             })
     }
     useEffect(() => {
-        fetch(`http://localhost:5000/category/categoryByUser/${loggedInUser._id}`)
+        fetch(`https://guarded-wave-53446.herokuapp.com/category/categoryByUser/${loggedInUser._id}`)
             .then(res => res.json())
             .then(data => setCategories(data))
     }, [reload])

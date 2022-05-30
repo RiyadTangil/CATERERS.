@@ -60,7 +60,7 @@ const SimpleCardForm = ({ order }) => {
       "ordersItems": forDatabase,
       "paymentId": paymentMethod.id
     }
-    axios.post("http://localhost:5000/orders", orderInfo)
+    axios.post("https://guarded-wave-53446.herokuapp.com/orders", orderInfo)
       .then(res => {
         toast.dismiss(loading);
         if (res.data) {

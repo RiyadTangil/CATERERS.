@@ -44,7 +44,7 @@ const EditModal = ({ show, setShow, editableFood }) => {
     const onSubmit = (e) => {
         const loading = toast.loading('Please wait...!');
         e.preventDefault()
-        fetch(`http://localhost:5000/foods/${editableFood._id}`, {
+        fetch(`https://guarded-wave-53446.herokuapp.com/foods/${editableFood._id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/Json'

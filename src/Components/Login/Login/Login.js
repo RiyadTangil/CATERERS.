@@ -38,7 +38,7 @@ const Login = (props) => {
         if (newUser && loginInfo.password && selectedUser && loginInfo.password === loginInfo.confirmPassword) {
 
             const loading = toast.loading('Please wait...!');
-            fetch("http://localhost:5000/user2", {
+            fetch("https://guarded-wave-53446.herokuapp.com/user2", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/Json'
@@ -90,7 +90,7 @@ const Login = (props) => {
         if (!newUser && loginInfo.email && loginInfo.password) {
 
             const loading = toast.loading('Please wait...!');
-            fetch("http://localhost:5000/login", {
+            fetch("https://guarded-wave-53446.herokuapp.com/login", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/Json'

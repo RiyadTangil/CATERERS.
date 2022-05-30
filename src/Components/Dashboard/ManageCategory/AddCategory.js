@@ -14,7 +14,7 @@ const AddCategory = ({setReloadCategory}) => {
     const handleCategoryAdd = (e) => {
         e.preventDefault()
         const loading = toast.loading('Please wait...!');
-        fetch("http://localhost:5000/category", {
+        fetch("https://guarded-wave-53446.herokuapp.com/category", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/Json'

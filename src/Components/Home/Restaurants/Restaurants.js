@@ -41,7 +41,7 @@ const Restaurants = ({ searchText }) => {
     }
 
     useEffect(() => {
-        fetch("http://localhost:5000/restaurant")
+        fetch("https://guarded-wave-53446.herokuapp.com/restaurant")
             .then(res => res.json())
             .then(data => setAllRestaurant(data))
     }, [])
@@ -149,7 +149,7 @@ const Restaurants = ({ searchText }) => {
                         <div className="col-md-9 ">
                             <div className="row g-2 ms-2">
                                 {
-                                    searchedRestaurants.length !== 0 ?
+                                    searchedRestaurants?.length > 0 ?
                                         searchedRestaurants?.map((restaurant, index) => <RestaurantCard restaurant={restaurant} toggleHeart={toggleHeart} setToggleHeart={setToggleHeart} index={index + 1} key={restaurant._id}></RestaurantCard>) :
                                         restaurants?.map((restaurant, index) => <RestaurantCard restaurant={restaurant} toggleHeart={toggleHeart} setToggleHeart={setToggleHeart} index={index + 1} key={restaurant._id}></RestaurantCard>)
                                 }

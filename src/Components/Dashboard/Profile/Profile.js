@@ -57,7 +57,7 @@ const Profile = () => {
         else {
             const loading = toast.loading('Please wait...!');
             e.preventDefault()
-            await fetch(`http://localhost:5000/user2/${loggedInUser._id}`, {
+            await fetch(`https://guarded-wave-53446.herokuapp.com/user2/${loggedInUser._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/Json'

@@ -21,3 +21,11 @@
 .bars-bg{
    color: lightslategray;
 }
+.item-container:hover .price-btn{
+  display: none;
+}
+.item-container:hover .delete-btn,
+.item-container:hover .edit-btn{
+  display: block !important;
+}
+

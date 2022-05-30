@@ -15,14 +15,14 @@ const ManageFoodMenu = () => {
     const [imgLink, setFile] = useState(null);
     const [info, setInfo] = useState({});
     useEffect(() => {
-        fetch(`http://localhost:5000/category/myFoods/${loggedInUser._id}`)
+        fetch(`https://guarded-wave-53446.herokuapp.com/category/myFoods/${loggedInUser._id}`)
             .then(res => res.json())
             .then(data => setFoods(data))
-    }, [loggedInUser,show])
+    }, [loggedInUser, show])
 
     const handleDelete = (event, id) => {
         const loading = toast.loading('Please wait...!');
-        fetch(`http://localhost:5000/foods/${id}`, {
+        fetch(`https://guarded-wave-53446.herokuapp.com/foods/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())
@@ -56,7 +56,7 @@ const ManageFoodMenu = () => {
     const onSubmit = (e) => {
         const loading = toast.loading('Please wait...!');
         e.preventDefault()
-        fetch(`http://localhost:5000/foods/${editableFood._id}`, {
+        fetch(`https://guarded-wave-53446.herokuapp.com/foods/${editableFood._id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/Json'
@@ -92,38 +92,36 @@ const ManageFoodMenu = () => {
     return (
         // <div className="row">
         //     <SideVarNav />
-        <DashboardContainer pageTitle={"Manage Caterer Menu"}>
-            {
-                <div>
-                    <table className="table table-borderless">
-                        <thead >
-                            <tr>
-                                <th className="text-secondary text-left" scope="col">Sr No</th>
-                                <th className="text-secondary" scope="col">Food Img</th>
-                                <th className="text-secondary" scope="col">Food Name</th>
 
-                                <th className="text-secondary" scope="col">price</th>
-                                <th className="text-secondary" scope="col">edit</th>
-                                <th className="text-secondary" scope="col">action</th>
-                            </tr>
-                        </thead>
+        <div>
+            <table className="table table-borderless">
+                <thead >
+                    <tr>
+                        <th className="text-secondary text-left" scope="col">Sr No</th>
+                        <th className="text-secondary" scope="col">Food Img</th>
+                        <th className="text-secondary" scope="col">Food Name</th>
 
-                        {foods.length > 0 ? foods.map((food, index) => <MenuDetails key={index + 1} foods={food} handleDelete={handleDelete} handleEdit={handleEdit} />): null}
-                        <AddItems
-                            show={show}
-                            setShow={setShow}
-                            imgLink={imgLink}
-                            setFile={setFile}
-                            handleBlur={handleBlur}
-                            onSubmit={onSubmit}
-                            categories={null}
-                            editableFood={editableFood}
-                        />
+                        <th className="text-secondary" scope="col">price</th>
+                        <th className="text-secondary" scope="col">edit</th>
+                        <th className="text-secondary" scope="col">action</th>
+                    </tr>
+                </thead>
 
-                    </table>
-                </div>
-            }
-        </DashboardContainer>
+                {foods.length > 0 ? foods.map((food, index) => <MenuDetails key={index + 1} foods={food} handleDelete={handleDelete} handleEdit={handleEdit} />) : null}
+                <AddItems
+                    show={show}
+                    setShow={setShow}
+                    imgLink={imgLink}
+                    setFile={setFile}
+                    handleBlur={handleBlur}
+                    onSubmit={onSubmit}
+                    categories={null}
+                    editableFood={editableFood}
+                />
+
+            </table>
+        </div>
+
 
         // </div>
     );

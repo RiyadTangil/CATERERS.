@@ -11,7 +11,7 @@ const RestaurantInfo = ({ setSearchResult }) => {
     const { id } = useParams();
     console.log(id)
     useEffect(() => {
-        fetch(`http://localhost:5000/user2/restaurantInfo/${id}`)
+        fetch(`https://guarded-wave-53446.herokuapp.com/user2/restaurantInfo/${id}`)
             .then(res => res.json())
             .then(data => setRestaurantInfo(data))
 

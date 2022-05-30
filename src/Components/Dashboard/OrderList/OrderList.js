@@ -7,7 +7,7 @@ const OrderList = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext)
     const [show, setShow] = useState(false)
     useEffect(() => {
-        fetch(`http://localhost:5000/orders/caterer-orders/${loggedInUser._id}`)
+        fetch(`https://guarded-wave-53446.herokuapp.com/orders/caterer-orders/${loggedInUser._id}`)
             .then(res => res.json())
             .then(data => setOrderList(data))
     }, [orderList])
@@ -24,7 +24,7 @@ const OrderList = () => {
             id: productKey,
             status: status
         };
-        fetch(`http://localhost:5000/orders/${productKey}`, {
+        fetch(`https://guarded-wave-53446.herokuapp.com/orders/${productKey}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(statusUpdatingInfo)

@@ -26,7 +26,7 @@ const RestaurantVerticalNav = ({ searchText }) => {
     const radioValue = [" Minimum order", "Minimum order  ", "food based off", "number of people", "Weight of Food", "Food wait time", "avaliable today ", "avaliable today "];
 
     useEffect(() => {
-        fetch(`http://localhost:5000/category/foodByCategory/${id}`)
+        fetch(`https://guarded-wave-53446.herokuapp.com/category/foodByCategory/${id}`)
             .then(res => res.json())
             .then(data => {
                 setFoodInfo(data?.data)
