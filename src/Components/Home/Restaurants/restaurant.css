@@ -1,6 +1,7 @@
 .restaurant-container {
   background-color: #f5f3f1 !important;
 }
+/* working */
 .sidebar-container {
   position: static !important;
   top: 100px;
@@ -18,11 +19,11 @@
 .sidebar-container:only-child {
   padding-bottom: 25px;
 }
-.dollar{
-  height:50px;
+.dollar {
+  height: 50px;
   width: 50px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  border-radius:50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
 }

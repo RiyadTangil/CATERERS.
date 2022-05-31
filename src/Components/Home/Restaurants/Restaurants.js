@@ -13,21 +13,21 @@ const Restaurants = ({ searchText }) => {
     const handleFiltering = (label, type) => {
 
         setFilteringClicked(!filteringClicked)
-        if (label == "Highest Rated") {
+        if (label === "Highest Rated") {
 
             let hightestToLowest = restaurants.sort((restaurant, nextRestaurant) => nextRestaurant.user?.rating - restaurant.user?.rating);
             setSearchedRestaurants(hightestToLowest)
 
 
         }
-        else if (label == "Most Recent") {
+        else if (label === "Most Recent") {
 
             // let lowestToHighest = restaurants.sort((restaurant, nextRestaurant) => restaurant.user?.rating - nextRestaurant.user?.rating);
             let recentRestaurants = restaurants.sort((restaurant, nextRestaurant) => new Date(nextRestaurant?.date).getTime() - new Date(restaurant?.date).getTime());
             setSearchedRestaurants(recentRestaurants)
 
         }
-        else if (type == "dollar") {
+        else if (type === "dollar") {
             console.log(label, "dollar label");
 
             // let lowestToHighest = restaurants.sort((restaurant, nextRestaurant) => restaurant.user?.rating - nextRestaurant.user?.rating);
